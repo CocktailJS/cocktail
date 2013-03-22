@@ -1,0 +1,35 @@
+{
+  "name": "cocktail",
+  "description": "The best project ever.",
+  "version": "0.0.1",
+  "homepage": "",
+  "author": {
+    "name": "Maximiliano Fierro",
+    "email": "elmasse@gmail.com"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "lib/Cocktail",
+  "engines": {
+    "node": ">= 0.6.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt-simple-mocha": "0.3.2",
+    "chai": "1.4.2",
+    "mocha": "1.8.1",
+    "grunt-mocha": "0.2.1",
+    "grunt-contrib-jshint": "~0.1.1",
+    "grunt-contrib-watch": "~0.2.0",
+    "grunt": "~0.4.0",
+    "sinon-chai": "~2.3.1",
+    "sinon": "~1.6.0"
+  },
+  "keywords": []
+}
