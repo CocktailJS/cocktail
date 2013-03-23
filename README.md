@@ -1,6 +1,6 @@
 # Cocktail JS
 
-Cocktail is a small but yet powerfull library with very simple principles:
+Cocktail is a small but yet powerful library with very simple principles:
 
 - Reuse code
 - Keep it simple 
