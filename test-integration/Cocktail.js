@@ -1,20 +1,46 @@
 'use strict';
 
 var chai = require("chai"),
+    sinon = require("sinon"),
+    sinonChai = require("sinon-chai"),
     expect = chai.expect,
     Cocktail = require('../lib/Cocktail.js');
+
+chai.use(sinonChai);
 
 describe('Cocktail Integration Test', function(){
 
     describe('`@merge` annotation adds the properties and methods in the options to the given subject', function(){
         var ClassA,
             ClassAA,
+            anObject,
             aMethod = function aMethod(){},
             aProperty = 1;
 
         beforeEach(function(){
             ClassA  = function(){};
             ClassAA = function(){};
+            anObject = {};
+        });
+
+        it('merges the properties and methods into the subject prototype when subject is a class', function(){
+            Cocktail.mix(ClassA, {
+                method: aMethod,
+                property: aProperty
+            });
+
+            expect(ClassA).to.respondTo('method');
+            expect(ClassA.prototype).to.have.property('property').that.equal(aProperty);
+        });
+
+        it('merges the properties and methods into the subject when subject is an object', function(){
+            Cocktail.mix(anObject, {
+                method: aMethod,
+                property: aProperty
+            });
+
+            expect(anObject).to.respondTo('method');
+            expect(anObject).to.have.property('property').that.equal(aProperty);
         });
 
         it('a `@merge` annotation is added by default if it is no specified', function(){
@@ -56,14 +82,16 @@ describe('Cocktail Integration Test', function(){
 
     describe('`@properties` annotation adds getter and setter for the specified properties to the given subject ', function(){
         var ClassA,
+            anObject,
             instanceA;         
 
         beforeEach(function(){
             ClassA = function(){};
+            anObject = {};
             instanceA = undefined;
         });
 
-        it('adds a getter/setter method and set the value for each property', function(){
+        it('adds a getter/setter method and set the value for each property to the subject prototype when subject is a class', function(){
             Cocktail.mix(ClassA, {
                 '@properties': {
                     value: 1,
@@ -82,6 +110,23 @@ describe('Cocktail Integration Test', function(){
 
             expect(instanceA.getValue()).to.be.equal(1);
             expect(instanceA.getName()).to.be.equal('name');
+
+        });
+
+        it('adds a getter/setter method and set the value for each property to the subject when subject is an object', function(){
+            Cocktail.mix(anObject, {
+                '@properties': {
+                    value: 1,
+                    name : 'name'
+                }
+            });
+
+            expect(anObject).to.respondTo('setName');
+            expect(anObject).to.respondTo('getName');
+            expect(anObject).to.respondTo('setValue');
+            expect(anObject).to.respondTo('getValue');
+            expect(anObject).to.have.property('value').that.equal(1);
+            expect(anObject).to.have.property('name').that.equal('name');
 
         });
 
@@ -105,4 +150,76 @@ describe('Cocktail Integration Test', function(){
 
     });
 
+    describe('`@extends` annotation makes the subject to inherit from the given base class ', function(){
+        var Base = function(){},
+            aMethod = sinon.spy(),
+            ClassA,
+            instanceA;         
+
+        Base.prototype.aMethod = aMethod;
+        Base.prototype.aProperty = 1;
+        
+        beforeEach(function(){
+            ClassA = function(){};
+            instanceA = undefined;
+        });
+
+        it('makes methods and properties from base available on the given subject', function(){
+            Cocktail.mix(ClassA, {
+                '@extends': Base
+            });
+
+            expect(ClassA).to.respondTo('aMethod');
+            expect(ClassA.prototype).to.have.property('aProperty').that.equal(1);
+
+            instanceA = new ClassA();
+
+            expect(instanceA).to.be.an.instanceOf(ClassA);
+            expect(instanceA).to.be.an.instanceOf(Base);
+        });
+
+        it('methods and properties can be overriden in the subject', function(){
+            Cocktail.mix(ClassA, {
+                '@extends': Base,
+
+                aMethod: function(){}
+
+            });
+
+            expect(ClassA).to.respondTo('aMethod');
+            expect(ClassA.prototype.aMethod).to.not.be.equal(aMethod);
+        });
+
+        it('throws an error if it is not called with Class to extend from', function(){
+            var anObject = {};
+            
+            expect(function(){
+                Cocktail.mix(ClassA, {
+                    '@extends': anObject
+                });
+            }).to.throw(Error);            
+
+        });
+
+        it('adds a `callSuper` method so an overriden method can be called', function(){
+            Cocktail.mix(ClassA, {
+                '@extends': Base,
+
+                aMethod: function(param){
+                    this.callSuper('aMethod', param);                    
+                }
+
+            });
+
+            expect(ClassA).to.respondTo('aMethod');
+            expect(ClassA.prototype.aMethod).to.not.be.equal(aMethod);
+            
+            instanceA = new ClassA();
+
+            instanceA.aMethod(1);
+
+            expect(aMethod).to.have.been.calledWith(1);
+        });
+
+    });        
 });
