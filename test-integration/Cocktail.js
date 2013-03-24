@@ -188,9 +188,15 @@ describe('Cocktail Integration Test', function(){
 
             expect(ClassA).to.respondTo('aMethod');
             expect(ClassA.prototype.aMethod).to.not.be.equal(aMethod);
+
+            instanceA = new ClassA();
+
+            instanceA.aMethod(1);
+
+            expect(aMethod).to.not.have.been.calledWith(1);
         });
 
-        it('throws an error if it is not called with Class to extend from', function(){
+        it('throws an error if it is not called with a Class to extend from', function(){
             var anObject = {};
             
             expect(function(){
@@ -221,5 +227,5 @@ describe('Cocktail Integration Test', function(){
             expect(aMethod).to.have.been.calledWith(1);
         });
 
-    });        
+    });
 });
