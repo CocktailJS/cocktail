@@ -1,4 +1,4 @@
-# Cocktail JS
+# Cocktail JS [![Build Status](https://travis-ci.org/CocktailJS/Cocktail.png?branch=master)](https://travis-ci.org/CocktailJS/Cocktail)
 
 Cocktail is a small but yet powerful library with very simple principles:
 
