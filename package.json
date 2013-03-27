@@ -2,7 +2,7 @@
   "name": "cocktail",
   "description": "Shake your Objects and Classes with Cocktail!",
   "version": "0.0.1",
-  "homepage": "",
+  "homepage": "http://cocktailjs.github.com",
   "author": {
     "name": "Maximiliano Fierro",
     "email": "elmasse@gmail.com"
@@ -25,7 +25,7 @@
     "test": "grunt test"
   },
   "devDependencies": {
-    "grunt-simple-mocha": "0.3.2",
+    "grunt-simple-mocha": "https://github.com/yaymukund/grunt-simple-mocha/tarball/7d1cb9bfd8580fc5369bd82e288f683bb7ca0d46",
     "chai": "1.4.2",
     "mocha": "1.8.1",
     "grunt-mocha": "0.2.1",
@@ -35,5 +35,5 @@
     "sinon-chai": "~2.3.1",
     "sinon": "~1.6.0"
   },
-  "keywords": []
+  "keywords": ["oop", "extends", "annotations", "traits", "talents", "properties", "mix", "class"]
 }
