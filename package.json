@@ -1,7 +1,7 @@
 {
   "name": "cocktail",
-  "description": "Shake your Objects and Classes with Cocktail!",
-  "version": "0.0.1",
+  "description": "Annotations, Traits and Talents - Shake your objects and classes with Cocktail!",
+  "version": "0.0.2",
   "homepage": "http://cocktailjs.github.com",
   "author": {
     "name": "Maximiliano Fierro",
