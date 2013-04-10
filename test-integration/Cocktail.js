@@ -227,5 +227,77 @@ describe('Cocktail Integration Test', function(){
             expect(aMethod).to.have.been.calledWith(1);
         });
 
+        // TODO: The constructor is being called successfully, but cannot make the assertion to work properly
+        // it('`callSuper` method in the constructor calls parent constructor', function(){
+        //     var ClassB = function(param){
+        //             this.callSuper('constructor', param);
+        //         },
+        //         Base = sinon.spy(function(){
+        //             console.log('called!');
+        //         }),
+        //         param = 1;
+
+        //     Cocktail.mix(ClassB, {
+        //         '@extends': Base
+        //     });
+
+        //     instanceA = new ClassB(param);
+
+        //     expect(Base).to.have.been.calledWith(param);
+        // });
+
+    });
+
+    describe('`@annotation` annotation registers the current mix as a custom annotation', function(){
+        var Custom = function(){},
+            Subject,
+            aProcess = sinon.spy(),
+            aSetter = sinon.spy();
+
+
+        beforeEach(function(){
+            Cocktail.restoreDefaultProcessors();
+            Subject = function(){};
+        });
+
+        it('adds the current definition as a custom annotation', function(){
+            var customValue = 1;
+
+            Cocktail.mix(Custom, {
+                '@annotation': 'custom',
+
+                setParameter: aSetter,
+                process: aProcess
+            });
+
+
+            Cocktail.mix(Subject, {
+                '@custom': customValue
+            });
+
+            expect(aSetter).to.have.been.calledWith(customValue);
+            expect(aProcess).to.have.been.calledWith(Subject);
+
+        });
+
+        it('if annotation already exists it gets overriden by the current definition as a custom annotation', function(){
+            var customValue = 1;
+
+            Cocktail.mix(Custom, {
+                '@annotation': 'traits',
+
+                setParameter: aSetter,
+                process: aProcess
+            });
+
+            Cocktail.mix(Subject, {
+                '@traits': customValue
+            });
+
+            expect(aSetter).to.have.been.calledWith(customValue);
+            expect(aProcess).to.have.been.calledWith(Subject);
+
+        });
+
     });
 });

@@ -2,4 +2,5 @@
 test*/
 .DS_Store
 .jshintrc
+.travis.yml
 Gruntfile.js
