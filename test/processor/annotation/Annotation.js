@@ -23,7 +23,7 @@ describe('Annotation Processor @annotation', function(){
         expect(sut.retain).to.equal(false);
     });
 
-    it('has priority set to 99 so it runs after inheritance processors', function(){
+    it('has priority set to 1000 so it runs after all other processors', function(){
         expect(sut.priority).to.equal(1000);
     });
 
