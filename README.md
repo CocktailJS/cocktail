@@ -39,7 +39,7 @@ As it was mentioned before, annotations are meta-data, which means that they are
 
 
 ## Documentation
-_(Coming soon)_
+The latest documentation is published at [CocktailJS Documentation](http://cocktailjs.github.io/docs/)
 
 ## Examples
 A Cocktail playground can be found in [cocktail recipes](https://github.com/CocktailJS/cocktail-recipes) repo.
@@ -48,7 +48,18 @@ A Cocktail playground can be found in [cocktail recipes](https://github.com/Cock
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-_(Nothing yet)_
+
+- 0.0.3 
+Current release. Alpha.
+annotation, traits, talents, extends, and properties features are usable and tested.
+Custom Annotations. 
+
+- 0.0.2
+Alpha version for traits, talents, extends, and properties features.
+Tests.
+
+-0.0.1
+First draft version
 
 ## License
 Copyright (c) 2013 Maximiliano Fierro  
