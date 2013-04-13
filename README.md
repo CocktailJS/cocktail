@@ -58,7 +58,7 @@ Custom Annotations.
 Alpha version for traits, talents, extends, and properties features.
 Tests.
 
--0.0.1
+- 0.0.1
 First draft version
 
 ## License
