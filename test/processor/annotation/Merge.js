@@ -27,10 +27,9 @@ describe('Annotation Processor @merge', function(){
     });
 
     describe('Merge process', function(){
-        var strategy;
 
         describe('`single` merge strategy', function(){
-            strategy = "single";
+            var strategy = "single";
 
             it('adds properties and/or methods defined in proto into subject object', function(){
                 var subject = {},
@@ -97,6 +96,83 @@ describe('Annotation Processor @merge', function(){
                 sut.process(Subject, proto);
 
                 expect(Subject.prototype).to.have.property('property').that.equal(1);
+                expect(Subject).to.respondTo('method');
+                expect(Subject).to.respondTo('override');
+                expect(Subject.prototype.override).to.be.equal(aMethod);
+            });
+
+
+        });
+
+
+        describe('`their` merge strategy', function(){
+            var strategy = "their";
+
+            it('adds properties and/or methods defined in proto into subject object', function(){
+                var subject = {},
+                    proto = {
+                        property: 1,
+                        method: function(){}
+                    };
+
+                sut.setParameter(strategy);
+                sut.process(subject, proto);
+
+                expect(subject).to.have.property('property').that.equal(1);
+                expect(subject).to.respondTo('method');
+            });
+
+            it('adds properties and/or methods defined in proto into Subject class', function(){
+                var Subject = function(){},
+                    proto = {
+                        property: 1,
+                        method: function(){}
+                    };
+
+                sut.setParameter(strategy);
+                sut.process(Subject, proto);
+
+                expect(Subject.prototype).to.have.property('property').that.equal(1);
+                expect(Subject).to.respondTo('method');
+            });
+
+            it('do NOT override properties and/or methods defined in subject object if they have the same name', function(){
+                var aMethod = function(){},
+                    subject = {
+                        property: 0,
+                        override: aMethod
+                    },
+                    proto = {
+                        property: 1,
+                        method: function(){},
+                        override: function(){}
+                    };
+
+                sut.setParameter(strategy);
+                sut.process(subject, proto);
+
+                expect(subject).to.have.property('property').that.equal(0);
+                expect(subject).to.respondTo('method');
+                expect(subject).to.respondTo('override');
+                expect(subject.override).to.be.equal(aMethod);
+            });
+
+            it('do NOT override properties and/or methods defined in Subject class if they have the same name', function(){
+                var aMethod = function(){},
+                    Subject = function(){},
+                    proto = {
+                        property: 1,
+                        method: function(){},
+                        override: function(){}
+                    };
+
+                Subject.prototype.property = 0;
+                Subject.prototype.override = aMethod;    
+
+                sut.setParameter(strategy);
+                sut.process(Subject, proto);
+
+                expect(Subject.prototype).to.have.property('property').that.equal(0);
                 expect(Subject).to.respondTo('method');
                 expect(Subject).to.respondTo('override');
                 expect(Subject.prototype.override).to.be.equal(aMethod);
