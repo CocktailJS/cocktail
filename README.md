@@ -34,8 +34,10 @@ As it was mentioned before, annotations are meta-data, which means that they are
 
 
 ## Getting Started
-- Install the module with: `npm install cocktail`
-- Start playing by just adding a `require('Cocktail')` in your file.
+Guides will be soon posted on CocktailJS site.
+
+- Install the module with: `npm install cocktail` or add cocktail to your `package.json` and then `npm install`
+- Start playing by just adding a `var Cocktail = require('Cocktail')` in your file.
 
 
 ## Documentation
@@ -49,17 +51,25 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+- 0.0.4 (current master)
+    - status: Alpha
+    - Added new merge strategies: mine (default -same as single), their, deep-mine and deep-their.
+    - Test for Merge strategies.
+
 - 0.0.3 
-Current release. Alpha.
-annotation, traits, talents, extends, and properties features are usable and tested.
-Custom Annotations. 
+    - status: Alpha.
+    - Annotation, traits, talents, extends, and properties features are stable and tested.
+    - Adde custom Annotations definitions mechanism thru @annotation.
+    - Added merge strategy: single.
 
 - 0.0.2
-Alpha version for traits, talents, extends, and properties features.
-Tests.
+    - status: Alpha.
+    - Alpha version for traits, talents, extends, and properties features.
+    - Tests.
 
 - 0.0.1
-First draft version
+    - status: Alpha.
+    - First draft version
 
 ## License
 Copyright (c) 2013 Maximiliano Fierro  
