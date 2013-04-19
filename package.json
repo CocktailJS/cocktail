@@ -1,8 +1,8 @@
 {
   "name": "cocktail",
-  "description": "Annotations, Traits and Talents - Shake your objects and classes with Cocktail!",
-  "version": "0.0.3",
-  "homepage": "http://cocktailjs.github.com",
+  "description": "CocktailJS is an small library to explore traits, talents, inheritance and annotations concepts in nodejs - Shake your objects and classes with Cocktail!",
+  "version": "0.0.4",
+  "homepage": "http://cocktailjs.github.io",
   "author": {
     "name": "Maximiliano Fierro",
     "email": "elmasse@gmail.com"
@@ -47,6 +47,7 @@
     "talents",
     "properties",
     "mix",
-    "class"
+    "class",
+    "inheritance"
   ]
 }
