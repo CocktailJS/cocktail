@@ -4,6 +4,7 @@ var chai = require("chai"),
     sinon = require("sinon"),
     sinonChai = require("sinon-chai"),
     expect = chai.expect,
+    Cocktail = require('../../../lib/Cocktail'),
     proxyquire = require("proxyquire");
 
 chai.use(sinonChai);
@@ -23,8 +24,8 @@ describe('Annotation Processor @annotation', function(){
         expect(sut.retain).to.equal(false);
     });
 
-    it('has priority set to 1000 so it runs after all other processors', function(){
-        expect(sut.priority).to.equal(1000);
+    it('has priority set to Cocktail.SEQUENCE.ANNOTATION', function(){
+        expect(sut.priority).to.equal(Cocktail.SEQUENCE.ANNOTATION);
     });
 
     describe('Parameter for @annotation annotation', function(){

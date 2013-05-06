@@ -1,7 +1,8 @@
 'use strict';
 
 var expect = require('chai').expect,
-    NoOp = require('../../lib/processor/NoOp.js');
+    Cocktail = require('../../lib/Cocktail'),
+    NoOp = require('../../lib/processor/NoOp');
 
 describe('NoOp Processor', function(){
     var sut = new NoOp();
@@ -10,8 +11,8 @@ describe('NoOp Processor', function(){
         expect(sut.retain).to.equal(false);
     });
 
-    it('has priority set to -1 so it is not picked up for the running queue', function(){
-        expect(sut.priority).to.equal(-1);
+    it('has priority set to Cocktail.SEQUENCE.NO_OP', function(){
+        expect(sut.priority).to.equal(Cocktail.SEQUENCE.NO_OP);
     });
 
     it('a NoOP processor instance has no process method', function(){

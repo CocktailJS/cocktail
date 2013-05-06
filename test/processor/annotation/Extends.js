@@ -4,6 +4,7 @@ var chai = require("chai"),
     sinon = require("sinon"),
     sinonChai = require("sinon-chai"),
     expect = chai.expect,
+    Cocktail = require('../../../lib/Cocktail'),
     Extends = require('../../../lib/processor/annotation/Extends.js');
 
 chai.use(sinonChai);
@@ -15,8 +16,8 @@ describe('Annotation Processor @extends', function(){
         expect(sut.retain).to.equal(false);
     });
 
-    it('has priority set to 10 so it is the first to run on the queue', function(){
-        expect(sut.priority).to.equal(10);
+    it('has priority set to Cocktail.SEQUENCE.EXTENDS', function(){
+        expect(sut.priority).to.equal(Cocktail.SEQUENCE.EXTENDS);
     });
 
     describe('Parameter for @extends annotation', function(){
