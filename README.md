@@ -34,11 +34,12 @@ As it was mentioned before, annotations are meta-data, which means that they are
 
 
 ## Getting Started
-Guides will be soon posted on CocktailJS site.
 
 - Install the module with: `npm install cocktail` or add cocktail to your `package.json` and then `npm install`
 - Start playing by just adding a `var Cocktail = require('Cocktail')` in your file.
 
+## Guides
+Guides can be found at [CocktailJS Guides](http://cocktailjs.github.io/guides/)
 
 ## Documentation
 The latest documentation is published at [CocktailJS Documentation](http://cocktailjs.github.io/docs/)
@@ -51,7 +52,13 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
-- 0.0.4 (current master)
+- 0.1.0 (current master)
+    - status: Alpha
+    - Added sequence to define custom annotations priorities.
+    - Documentation update.
+    - Tests for Sequence.
+
+- 0.0.4
     - status: Alpha
     - Added new merge strategies: mine (default -same as single), their, deep-mine and deep-their.
     - Test for Merge strategies.
