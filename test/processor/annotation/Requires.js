@@ -18,7 +18,7 @@ describe('Annotation Processor @requires', function(){
 
     describe('Parameter for @properties annotation', function(){
 
-        it('accepts [] as parameter', function(){
+        it('accepts a String[] as parameter', function(){
             var sut = new Requires(),
                 requires = ['aRequired'];
 
@@ -26,6 +26,16 @@ describe('Annotation Processor @requires', function(){
 
             expect(sut.getParameter()).to.contain('aRequired');
         });
+
+        it('accepts a String as parameter', function(){
+            var sut = new Requires(),
+                requires = 'aRequired';
+
+            sut.setParameter(requires);
+
+            expect(sut.getParameter()).to.contain('aRequired');
+        });
+
     });
 
     describe('Requires process', function(){

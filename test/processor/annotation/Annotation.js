@@ -52,7 +52,6 @@ describe('Annotation Processor @annotation', function(){
 
                 expect(registerProcessors).to.have.been.calledWith({'@custom': Subject});
             });
-
         });
 
     });
