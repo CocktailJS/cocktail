@@ -1,7 +1,7 @@
 {
   "name": "cocktail",
   "description": "CocktailJS is a small library to explore traits, talents, inheritance and annotations concepts in nodejs - Shake your objects and classes with Cocktail!",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "homepage": "http://cocktailjs.github.io",
   "author": {
     "name": "Maximiliano Fierro",
