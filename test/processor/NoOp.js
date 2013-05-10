@@ -18,4 +18,10 @@ describe('NoOp Processor', function(){
     it('a NoOP processor instance has no process method', function(){
         expect(sut.process).to.be.an('undefined');
     });
+
+    it('a NoOP processor instance setParameter does nothing', function(){
+        sut.setParameter('Whatever');
+        
+        expect(sut.getParameter()).to.equal(undefined);
+    });
 });  
