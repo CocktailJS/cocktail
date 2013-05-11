@@ -17,7 +17,7 @@ describe('Annotation Processor @properties', function(){
 
     describe('Parameter for @properties annotation', function(){
 
-        it('accepts [] as parameter', function(){
+        it('accepts {} as parameter', function(){
             var sut = new Properties(),
                 properties = {};
 
@@ -25,6 +25,17 @@ describe('Annotation Processor @properties', function(){
 
             expect(sut.getParameter()).to.be.equal(properties);
         });
+
+        it('throws an error if parameter is set to an Array', function(){
+            expect(function(){ sut.setParameter(['some']);}).to.throw(Error, /@properties parameter should be an Object/);
+            expect(sut.getParameter()).to.be.an('undefined');
+        });
+
+        it('throws an error if parameter is set to a String', function(){
+            expect(function(){ sut.setParameter('some');}).to.throw(Error, /@properties parameter should be an Object/);
+            expect(sut.getParameter()).to.be.an('undefined');
+        });
+
     });
 
     describe('Properties process', function(){
