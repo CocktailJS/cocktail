@@ -4,8 +4,8 @@ var chai = require("chai"),
     sinon = require("sinon"),
     sinonChai = require("sinon-chai"),
     expect = chai.expect,
-    Cocktail = require('../../../lib/Cocktail'),
-    Extends = require('../../../lib/processor/annotation/Extends.js');
+    Cocktail = require('../../../../lib/Cocktail'),
+    Extends = require('../../../../lib/processor/annotation/Extends.js');
 
 chai.use(sinonChai);
 

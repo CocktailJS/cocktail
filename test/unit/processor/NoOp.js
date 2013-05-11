@@ -1,8 +1,8 @@
 'use strict';
 
 var expect = require('chai').expect,
-    Cocktail = require('../../lib/Cocktail'),
-    NoOp = require('../../lib/processor/NoOp');
+    Cocktail = require('../../../lib/Cocktail'),
+    NoOp = require('../../../lib/processor/NoOp');
 
 describe('NoOp Processor', function(){
     var sut = new NoOp();

@@ -4,7 +4,7 @@ var chai = require("chai"),
     sinon = require("sinon"),
     sinonChai = require("sinon-chai"),
     expect = chai.expect,
-    Cocktail = require('../lib/Cocktail.js');
+    Cocktail = require('../../lib/Cocktail.js');
 
 chai.use(sinonChai);
 
@@ -300,4 +300,5 @@ describe('Cocktail Integration Test', function(){
         });
 
     });
+
 });

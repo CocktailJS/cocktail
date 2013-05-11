@@ -1,8 +1,8 @@
 'use strict';
 
 var expect = require('chai').expect,
-    Cocktail = require('../../../lib/Cocktail'),
-    Requires = require('../../../lib/processor/annotation/Requires.js');
+    Cocktail = require('../../../../lib/Cocktail'),
+    Requires = require('../../../../lib/processor/annotation/Requires.js');
 
 describe('Annotation Processor @requires', function(){
     var sut = new Requires();

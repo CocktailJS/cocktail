@@ -4,7 +4,7 @@ var chai = require("chai"),
     sinon = require("sinon"),
     sinonChai = require("sinon-chai"),
     expect = chai.expect,
-    Cocktail = require('../../../lib/Cocktail'),
+    Cocktail = require('../../../../lib/Cocktail'),
     proxyquire = require("proxyquire");
 
 chai.use(sinonChai);
@@ -14,7 +14,7 @@ describe('Annotation Processor @annotation', function(){
         registerProcessors = sinon.spy(),
         sut;
 
-    Annotation =  proxyquire('../../../lib/processor/annotation/Annotation.js', {
+    Annotation =  proxyquire('../../../../lib/processor/annotation/Annotation.js', {
         '../../Cocktail': {registerProcessors: registerProcessors}
     });
 

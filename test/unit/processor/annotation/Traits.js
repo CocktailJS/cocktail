@@ -2,9 +2,9 @@
 
 var chai = require("chai"),
     expect = chai.expect,
-    Cocktail = require('../../../lib/Cocktail'),
-    Requires = require('../../../lib/processor/annotation/Requires.js'),
-    Traits = require('../../../lib/processor/annotation/Traits.js');
+    Cocktail = require('../../../../lib/Cocktail'),
+    Requires = require('../../../../lib/processor/annotation/Requires.js'),
+    Traits = require('../../../../lib/processor/annotation/Traits.js');
 
 describe('Annotation Processor @traits', function(){
     var sut = new Traits();

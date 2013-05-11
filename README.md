@@ -51,6 +51,26 @@ A Cocktail playground can be found in [cocktail recipes](https://github.com/Cock
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
+### Running Tests
+Add your unit and/or integration tests and execute
+
+    $ grunt test
+
+### Before Commiting
+Run grunt to check lint and execute tests
+
+    $ grunt
+
+
+### Check test code coverage with instanbul
+
+Install instanbul from npm globally if you don't have it already installed
+
+    $ npm install -g istanbul 
+
+Run
+
+    $ istanbul cover _mocha -- -u exports --recursive test
 
 ## Release History
 

@@ -15,7 +15,7 @@ module.exports = function(grunt) {
         src: ['lib/**/*.js']
       },
       test: {
-        src: ['test*/**/*.js'],
+        src: ['test/**/*.js'],
         options: {
             es5: true,
             expr: true,
@@ -26,7 +26,25 @@ module.exports = function(grunt) {
 
     simplemocha: {
       all: {
-          src: 'test*/**/*.js',
+          src: 'test/**/*.js',
+          options: {
+              timeout: 3000,
+              ignoreLeaks: false,
+              ui: 'bdd',
+              reporter: 'spec'
+          }
+      },
+      unit: {
+          src: 'test/unit/**/*.js',
+          options: {
+              timeout: 3000,
+              ignoreLeaks: false,
+              ui: 'bdd',
+              reporter: 'spec'
+          }
+      },
+      integration: {
+          src: 'test/integration/**/*.js',
           options: {
               timeout: 3000,
               ignoreLeaks: false,
@@ -58,7 +76,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-simple-mocha');
 
   // Default task.
-  grunt.registerTask('test', 'simplemocha');
+  grunt.registerTask('test', 'simplemocha:all');
 
   grunt.registerTask('default', ['jshint', 'test']);
 

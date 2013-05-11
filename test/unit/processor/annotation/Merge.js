@@ -1,8 +1,8 @@
 'use strict';
 
 var expect = require('chai').expect,
-    Cocktail = require('../../../lib/Cocktail'),
-    Merge = require('../../../lib/processor/annotation/Merge.js');
+    Cocktail = require('../../../../lib/Cocktail'),
+    Merge = require('../../../../lib/processor/annotation/Merge.js');
 
 describe('Annotation Processor @merge', function(){
     var sut = new Merge();

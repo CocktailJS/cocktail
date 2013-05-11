@@ -1,7 +1,7 @@
 'use strict';
 
 var expect = require('chai').expect,
-    sequence = require('../../lib/processor/sequence');
+    sequence = require('../../../lib/processor/sequence');
 
 describe('sequence', function(){
 
