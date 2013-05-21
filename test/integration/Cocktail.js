@@ -301,4 +301,27 @@ describe('Cocktail Integration Test', function(){
 
     });
 
+    describe('`@exports` annotation registers the current mix as the specified value', function(){
+        var Custom = function(){};
+
+        it('exports the current mix in the specified value', function() {
+            var module = {
+                exports: undefined
+            };
+
+            Cocktail.mix(Custom, {
+                '@exports': module,
+                
+                some: 'a',
+
+                aMethod: function(){}
+            });
+
+            expect(module.exports).to.not.be.an('undefined');
+            expect(module.exports).to.respondTo('aMethod');
+        });
+    
+    }); 
+
+
 });
