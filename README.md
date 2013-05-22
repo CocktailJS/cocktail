@@ -74,7 +74,13 @@ Run
 
 ## Release History
 
-- 0.1.0 (current master)
+- 0.1.1 (current master)
+    - status: Alpha
+    - Added `@exports` annotation.
+    - Documentation update.
+    - Tests for @exports annotation.
+
+- 0.1.0
     - status: Alpha
     - Added sequence to define custom annotations priorities.
     - Documentation update.
