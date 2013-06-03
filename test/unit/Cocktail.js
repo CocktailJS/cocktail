@@ -69,6 +69,31 @@ describe('Cocktail', function(){
             });
         });
 
+        describe('mix({Object} classDefinition)', function(){
+
+            it('returns the a class if one single argument is specified with constructor.', function(){
+                var sut;
+
+                sut = Cocktail.mix({
+                    constructor: function() {}
+                });
+
+                expect(sut).to.be.a('function');
+            });
+
+            it('returns the a class if one single argument is specified with an @extends annotation.', function(){
+                var MyClass = function(){},
+                    sut;
+
+                sut = Cocktail.mix({
+                    '@extends': MyClass
+                });
+
+                expect(sut).to.be.a('function');
+            });
+
+        });
+
         describe('mix({Class} MyClass, {Object} prototype)', function(){
             var MyClass = function(){},
                 aMethod = function method(){};

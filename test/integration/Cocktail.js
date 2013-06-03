@@ -148,6 +148,35 @@ describe('Cocktail Integration Test', function(){
 
         });
 
+        it('adds a getter/setter method and set the value for each property to the subject prototype when subject is a class definition', function(){
+            var ClassA;
+
+            ClassA = Cocktail.mix({
+
+                constructor: function(){
+                    //do smth
+                },
+
+                '@properties': {
+                    value: 1,
+                    name : 'name'
+                }
+            });
+
+            expect(ClassA).to.respondTo('setName');
+            expect(ClassA).to.respondTo('getName');
+            expect(ClassA).to.respondTo('setValue');
+            expect(ClassA).to.respondTo('getValue');
+            expect(ClassA.prototype).to.have.property('value').that.equal(1);
+            expect(ClassA.prototype).to.have.property('name').that.equal('name');
+
+            instanceA = new ClassA();
+
+            expect(instanceA.getValue()).to.be.equal(1);
+            expect(instanceA.getName()).to.be.equal('name');
+
+        });
+
     });
 
     describe('`@extends` annotation makes the subject to inherit from the given base class ', function(){
@@ -245,6 +274,20 @@ describe('Cocktail Integration Test', function(){
 
         //     expect(Base).to.have.been.calledWith(param);
         // });
+
+        it('makes methods and properties from base available on the given subject when subject is a class definition', function(){
+            ClassA = Cocktail.mix({
+                '@extends': Base
+            });
+
+            expect(ClassA).to.respondTo('aMethod');
+            expect(ClassA.prototype).to.have.property('aProperty').that.equal(1);
+
+            instanceA = new ClassA();
+
+            expect(instanceA).to.be.an.instanceOf(ClassA);
+            expect(instanceA).to.be.an.instanceOf(Base);
+        });
 
     });
 
