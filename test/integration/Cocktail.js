@@ -323,6 +323,26 @@ describe('Cocktail Integration Test', function(){
 
         });
 
+        it('adds the current class definition as a custom annotation', function(){
+            var customValue = 1;
+
+            Cocktail.mix({
+                '@annotation': 'custom',
+
+                setParameter: aSetter,
+                process: aProcess
+            });
+
+
+            Cocktail.mix(Subject, {
+                '@custom': customValue
+            });
+
+            expect(aSetter).to.have.been.calledWith(customValue);
+            expect(aProcess).to.have.been.calledWith(Subject);
+
+        });
+
         it('if annotation already exists it gets overriden by the current definition as a custom annotation', function(){
             var customValue = 1;
 
@@ -364,6 +384,25 @@ describe('Cocktail Integration Test', function(){
             expect(module.exports).to.respondTo('aMethod');
         });
     
+        it('exports the current class definition in the specified value', function() {
+            var module = {
+                exports: undefined
+            };
+
+            Cocktail.mix({
+                '@exports': module,
+                
+                constructor: function() {/*Body*/},
+
+                some: 'a',
+
+                aMethod: function(){/*Body*/}
+            });
+
+            expect(module.exports).to.not.be.an('undefined');
+            expect(module.exports).to.respondTo('aMethod');
+        });
+
     }); 
 
 
