@@ -34,6 +34,23 @@ In the example above we created a "Class" named _MyClass_, and we use the `@prop
  
 As it was mentioned before, annotations are meta-data, which means that they are not part of _MyClass_ or its prototype. 
 
+###Combine Annotations and single parameter to export your class definition
+Since version 0.2.0 you can define a class or trait without passing the constructor as the first parameter, and you can
+export the result of the mix with one annotation so you don't forget `module.exports = MyClass`:
+
+MyClass.js
+
+    var Cocktail = require('Cocktail'),
+        MySuperClass = require('./MySuperClass');
+
+    Cocktail.mix({
+        '@extends': MySuperClass,
+        '@exports': module,
+        '@properties' : {
+            name: 'a default name'
+        }
+    });
+
 
 ## Getting Started
 
@@ -74,7 +91,14 @@ Run
 
 ## Release History
 
-- 0.1.1 (current master)
+- 0.2.0 (current master)
+    - status: Alpha
+    - Added single parameter class/trait definition. If the first parameter is an object literal and it contains a 
+    constructor definition, or the annotation '@extends', '@traits', '@requires' or '@annotation' it will be treated as
+    a class definition.
+    - Tests for single parameter definition.
+
+- 0.1.1
     - status: Alpha
     - Added `@exports` annotation.
     - Documentation update.
