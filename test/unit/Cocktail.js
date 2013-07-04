@@ -92,6 +92,20 @@ describe('Cocktail', function(){
                 expect(sut).to.be.a('function');
             });
 
+            it('constructor defined in the classDefinition should not be enumerable.', function(){
+                var sut;
+
+                sut = Cocktail.mix({
+                    constructor: function() {
+                    }
+                });
+
+                expect(sut).to.be.a('function');
+
+                expect(sut.prototype).to.not.contain.keys('constructor');
+            });
+
+
         });
 
         describe('mix({Class} MyClass, {Object} prototype)', function(){
