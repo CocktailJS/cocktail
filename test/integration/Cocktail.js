@@ -303,6 +303,10 @@ describe('Cocktail Integration Test', function(){
             Subject = function(){};
         });
 
+        afterEach(function(){
+            Cocktail.restoreDefaultProcessors();
+        });
+
         it('adds the current definition as a custom annotation', function(){
             var customValue = 1;
 
@@ -405,5 +409,46 @@ describe('Cocktail Integration Test', function(){
 
     }); 
 
+    describe('Single Argument Parameter Class Definition', function(){
+
+        it('returns a class if one single argument is specified with an @extends annotation.', function(){
+            var MyClass = function(){},
+                method = function(){},
+                value = 'value',
+                sut;
+
+            MyClass.prototype = {
+                method: method,
+                value : value
+            };
+
+            sut = Cocktail.mix({
+                '@extends': MyClass
+            });
+
+            expect(sut).to.be.a('function');
+            expect(sut).to.respondTo('method');
+            expect(sut.prototype.value).to.be.equal(value);
+        });
+
+        it('returns a class if one single argument is specified with a @traits annotation.', function(){
+            var MyClass = function(){},
+                MyTrait = function(){},
+                sut;
+
+            MyTrait.prototype.method = function(){};
+
+            sut = Cocktail.mix({
+                '@traits': [MyTrait]
+            });
+
+            expect(sut).to.be.a('function');
+
+            expect(sut).to.respondTo('method');
+
+        });
+
+
+    });
 
 });

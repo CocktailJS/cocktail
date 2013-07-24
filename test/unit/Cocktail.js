@@ -81,7 +81,7 @@ describe('Cocktail', function(){
                 expect(sut).to.be.a('function');
             });
 
-            it('returns the a class if one single argument is specified with an @extends annotation.', function(){
+            it('returns a class if one single argument is specified with an @extends annotation.', function(){
                 var MyClass = function(){},
                     sut;
 
@@ -90,6 +90,20 @@ describe('Cocktail', function(){
                 });
 
                 expect(sut).to.be.a('function');
+            });
+
+            it('returns a class if one single argument is specified with a @traits annotation.', function(){
+                var MyTrait = function(){},
+                    sut;
+
+                MyTrait.prototype.method = function(){};
+
+                sut = Cocktail.mix({
+                    '@traits': [MyTrait]
+                });
+
+                expect(sut).to.be.a('function');
+
             });
 
             it('constructor defined in the classDefinition should not be enumerable.', function(){
