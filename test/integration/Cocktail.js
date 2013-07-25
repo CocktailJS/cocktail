@@ -10,6 +10,14 @@ chai.use(sinonChai);
 
 describe('Cocktail Integration Test', function(){
 
+    beforeEach(function(){
+        Cocktail.restoreDefaultProcessors();
+    });
+
+    afterEach(function(){
+        Cocktail.restoreDefaultProcessors();
+    });
+
     describe('`@merge` annotation adds the properties and methods in the options to the given subject', function(){
         var ClassA,
             ClassAA,
@@ -297,14 +305,8 @@ describe('Cocktail Integration Test', function(){
             aProcess = sinon.spy(),
             aSetter = sinon.spy();
 
-
         beforeEach(function(){
-            Cocktail.restoreDefaultProcessors();
             Subject = function(){};
-        });
-
-        afterEach(function(){
-            Cocktail.restoreDefaultProcessors();
         });
 
         it('adds the current definition as a custom annotation', function(){
