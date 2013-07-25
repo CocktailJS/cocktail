@@ -432,8 +432,7 @@ describe('Cocktail Integration Test', function(){
         });
 
         it('returns a class if one single argument is specified with a @traits annotation.', function(){
-            var MyClass = function(){},
-                MyTrait = function(){},
+            var MyTrait = function(){},
                 sut;
 
             MyTrait.prototype.method = function(){};
