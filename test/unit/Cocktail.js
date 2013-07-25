@@ -4,9 +4,14 @@ var chai = require("chai"),
     sinon = require("sinon"),
     sinonChai = require("sinon-chai"),
     expect = chai.expect,
-    Cocktail = require('../../lib/Cocktail.js');
+    Cocktail = require('../../lib/Cocktail'),
+    RestoreProcessors = require('../helper/RestoreProcessors');
 
 chai.use(sinonChai);
+
+Cocktail.mix(Cocktail, {
+    '@talents': [RestoreProcessors]
+});
 
 describe('Cocktail', function(){
     var Merge   = function Merge(){},
@@ -21,7 +26,6 @@ describe('Cocktail', function(){
 
     MergeSpy = sinon.spy(Merge);
 
-
     beforeEach(function(){
         Cocktail.clearProcessors();
         Cocktail.registerProcessors({
@@ -30,7 +34,7 @@ describe('Cocktail', function(){
     });
 
     afterEach(function(){
-
+        Cocktail.restoreDefaultProcessors();
     });
 
 

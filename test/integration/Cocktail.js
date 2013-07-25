@@ -4,9 +4,15 @@ var chai = require("chai"),
     sinon = require("sinon"),
     sinonChai = require("sinon-chai"),
     expect = chai.expect,
-    Cocktail = require('../../lib/Cocktail.js');
+    Cocktail = require('../../lib/Cocktail'),
+    RestoreProcessors = require('../helper/RestoreProcessors');
 
 chai.use(sinonChai);
+
+Cocktail.mix(Cocktail, {
+    '@talents': [RestoreProcessors]
+});
+
 
 describe('Cocktail Integration Test', function(){
 
