@@ -51,6 +51,23 @@ MyClass.js
         }
     });
 
+###Even easier Single Parameter Class Definition  
+Version 0.3 introduces a pseudo-annotation `@as` to help Single Parameter Class Definition. Now you can define
+a Class using `@as` passing a value of `class`:
+
+MySuperClass.js
+
+    var Cocktail = require('Cocktail')
+
+    Cocktail.mix({
+        '@exports' : module,
+        '@as'      : 'class',
+
+        '@properties' : {
+            name: 'a default name'
+        }
+    });
+
 
 ## Getting Started
 
@@ -91,7 +108,13 @@ Run
 
 ## Release History
 
-- 0.2.0 (current master)
+
+- 0.3.0 (current master)
+    - status: Alpha
+    - Introduced pseudo-annotation `@as` intended for single parameter class definition
+    - Tests for pseudo-annotation `@as`
+
+- 0.2.0
     - status: Alpha
     - Added single parameter class/trait definition. If the first parameter is an object literal and it contains a 
     constructor definition, or the annotation '@extends', '@traits', '@requires' or '@annotation' it will be treated as
