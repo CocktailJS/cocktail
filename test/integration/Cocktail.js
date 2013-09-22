@@ -470,6 +470,23 @@ describe('Cocktail Integration Test', function(){
 
         });
 
+        it('did not return a class if one single argument is specified with a @as annotation with a value different of "class".', function(){
+            var sut;
+
+            sut = Cocktail.mix({
+                '@as': 'SomethingElse',
+
+                method: function() {}
+            });
+
+            expect(sut).not.to.be.a('function');
+            expect(sut).to.be.a('object');
+            //even thou the Class is not returned, the object still responds to method
+            expect(sut).to.respondTo('method');
+            //@as pseudo-annotation is not processed, so it is not removed from sut
+            expect(sut).to.have.property('@as');
+        });
+
     });
 
 });
