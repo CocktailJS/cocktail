@@ -455,6 +455,20 @@ describe('Cocktail Integration Test', function(){
 
         });
 
+        it('returns a class if one single argument is specified with a @as annotation with a "class" value.', function(){
+            var sut;
+
+            sut = Cocktail.mix({
+                '@as': 'class',
+
+                method: function() {}
+            });
+
+            expect(sut).to.be.a('function');
+
+            expect(sut).to.respondTo('method');
+
+        });
 
     });
 
