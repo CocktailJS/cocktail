@@ -417,6 +417,49 @@ describe('Cocktail Integration Test', function(){
 
     }); 
 
+    describe('`@static` annotations defines methods and properties in the class', function(){
+        it('adds static method to ClassA', function(){
+            var method = function(){},
+                ClassA, instance;
+
+            ClassA = Cocktail.mix({
+                '@as'    : 'class',
+                '@static': {
+                    method: method
+                }
+            });
+
+            expect(ClassA).to.be.a('function');
+            expect(ClassA.method).to.be.a('function');
+            
+            instance = new ClassA();
+
+            expect(instance).to.not.respondTo('method');
+
+        });
+
+        it('adds static property to ClassA', function(){
+            var property = 'property',
+                ClassA, instance;
+
+            ClassA = Cocktail.mix({
+                '@as'    : 'class',
+                '@static': {
+                    property: property
+                }
+            });
+
+            expect(ClassA).to.be.a('function');
+            expect(ClassA.property).to.be.a('string');
+
+            expect(ClassA.property).to.be.eql(property);
+            
+            instance = new ClassA();
+            expect(instance.property).to.be.an('undefined');
+
+        });        
+    });
+
     describe('Single Argument Parameter Class Definition', function(){
 
         it('returns a class if one single argument is specified with an @extends annotation.', function(){
