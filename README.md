@@ -108,8 +108,13 @@ Run
 
 ## Release History
 
+- 0.4.0
+    - status: Alpha
+    - Added `@static` annotation to define static members on class mix.
+    - Tests for `@static` annotation.
+    - Refactored Merge processor. Added constructor parameter to reuse functionality on Static processor.
 
-- 0.3.0 (current master)
+- 0.3.0
     - status: Alpha
     - Introduced pseudo-annotation `@as` intended for single parameter class definition
     - Tests for pseudo-annotation `@as`
