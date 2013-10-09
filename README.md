@@ -113,7 +113,7 @@ Run
     - Fixed issue with constructor chain parameters.
     - Test added for constructor chain parameters.
 
-- 0.4.1 (current master)
+- 0.4.1
     - status: Alpha
     - Fixed issue with constructor chain.
     - Test added for single parameter class definition constructor chain.
