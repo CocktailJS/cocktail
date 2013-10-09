@@ -530,6 +530,29 @@ describe('Cocktail Integration Test', function(){
             expect(sut).to.have.property('@as');
         });
 
+        it('chains constructors when extending and parent has a constructor defined', function(){
+            var value = 1,
+                Parent, Class, sut;
+
+            Parent = Cocktail.mix({
+                '@as': 'class',
+
+                constructor: function(){
+                    this.created = value;
+                }
+            });
+
+            Class = Cocktail.mix({
+                '@as': 'class',
+                '@extends': Parent                
+            });
+
+            sut = new Class();
+
+            expect(sut).to.have.property('created');
+
+        });
+
     });
 
 });
