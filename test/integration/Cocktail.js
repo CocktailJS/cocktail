@@ -537,8 +537,9 @@ describe('Cocktail Integration Test', function(){
             Parent = Cocktail.mix({
                 '@as': 'class',
 
-                constructor: function(){
+                constructor: function(option){
                     this.created = value;
+                    this.option  = option;
                 }
             });
 
@@ -547,10 +548,12 @@ describe('Cocktail Integration Test', function(){
                 '@extends': Parent                
             });
 
-            sut = new Class();
+            sut = new Class(value);
 
             expect(sut).to.have.property('created');
-
+            expect(sut.created).to.be.equal(value);
+            expect(sut).to.have.property('option');
+            expect(sut.option).to.be.equal(value);
         });
 
     });
