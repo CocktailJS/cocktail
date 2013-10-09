@@ -108,6 +108,16 @@ Run
 
 ## Release History
 
+- 0.4.2 (current master)
+    - status: Alpha
+    - Fixed issue with constructor chain parameters.
+    - Test added for constructor chain parameters.
+
+- 0.4.1 (current master)
+    - status: Alpha
+    - Fixed issue with constructor chain.
+    - Test added for single parameter class definition constructor chain.
+
 - 0.4.0
     - status: Alpha
     - Added `@static` annotation to define static members on class mix.
