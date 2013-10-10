@@ -374,6 +374,32 @@ describe('Cocktail Integration Test', function(){
 
         });
 
+        it('if the annotation process invokes mix() the processor queue should be independent.', function(){
+            var customValue = 1;
+
+
+            Cocktail.mix({
+                '@annotation': 'custom',
+
+                setParameter: aSetter,
+                process: function(){
+                    var proto = {};
+
+                    Cocktail.mix(proto, {
+                        '@merge': 'mine',
+                        a: 2,
+                    });
+                }
+            });
+
+
+            Cocktail.mix(Subject, {
+                '@custom': customValue
+            });
+
+            expect(aSetter).to.have.been.calledWith(customValue);
+        });
+
     });
 
     describe('`@exports` annotation registers the current mix as the specified value', function(){
