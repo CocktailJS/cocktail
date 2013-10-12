@@ -108,7 +108,12 @@ Run
 
 ## Release History
 
-- 0.4.2 (current master)
+- 0.4.3 (current master)
+    - status: Alpha
+    - Fixed issue with mix being called from an annotation process.
+    - Test added.
+
+- 0.4.2 
     - status: Alpha
     - Fixed issue with constructor chain parameters.
     - Test added for constructor chain parameters.
