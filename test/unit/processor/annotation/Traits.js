@@ -2,7 +2,7 @@
 
 var chai = require("chai"),
     expect = chai.expect,
-    Cocktail = require('../../../../lib/Cocktail'),
+    cocktail = require('../../../../lib/cocktail'),
     Requires = require('../../../../lib/processor/annotation/Requires.js'),
     Traits = require('../../../../lib/processor/annotation/Traits.js');
 
@@ -13,8 +13,8 @@ describe('Annotation Processor @traits', function(){
         expect(sut.retain).to.equal(false);
     });
 
-    it('has priority set to Cocktail.SEQUENCE.TRAITS', function(){
-        expect(sut.priority).to.equal(Cocktail.SEQUENCE.TRAITS);
+    it('has priority set to cocktail.SEQUENCE.TRAITS', function(){
+        expect(sut.priority).to.equal(cocktail.SEQUENCE.TRAITS);
     });
 
     describe('Parameter for @traits annotation', function(){

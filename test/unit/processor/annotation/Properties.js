@@ -1,7 +1,7 @@
 'use strict';
 
 var expect = require('chai').expect,
-    Cocktail = require('../../../../lib/Cocktail'),
+    cocktail = require('../../../../lib/cocktail'),
     Properties = require('../../../../lib/processor/annotation/Properties.js');
 
 describe('Annotation Processor @properties', function(){
@@ -11,8 +11,8 @@ describe('Annotation Processor @properties', function(){
         expect(sut.retain).to.equal(false);
     });
 
-    it('has priority set to Cocktail.SEQUENCE.PROPERTIES', function(){
-        expect(sut.priority).to.equal(Cocktail.SEQUENCE.PROPERTIES);
+    it('has priority set to cocktail.SEQUENCE.PROPERTIES', function(){
+        expect(sut.priority).to.equal(cocktail.SEQUENCE.PROPERTIES);
     });
 
     describe('Parameter for @properties annotation', function(){

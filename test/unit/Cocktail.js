@@ -4,16 +4,16 @@ var chai = require("chai"),
     sinon = require("sinon"),
     sinonChai = require("sinon-chai"),
     expect = chai.expect,
-    Cocktail = require('../../lib/Cocktail'),
+    cocktail = require('../../lib/cocktail'),
     RestoreProcessors = require('../helper/RestoreProcessors');
 
 chai.use(sinonChai);
 
-Cocktail.mix(Cocktail, {
+cocktail.mix(cocktail, {
     '@talents': [RestoreProcessors]
 });
 
-describe('Cocktail', function(){
+describe('cocktail', function(){
     var Merge   = function Merge(){},
         mergeProcessSpy = sinon.spy(),
         mergeSetParameterSpy = sinon.spy(),
@@ -27,14 +27,14 @@ describe('Cocktail', function(){
     MergeSpy = sinon.spy(Merge);
 
     beforeEach(function(){
-        Cocktail.clearProcessors();
-        Cocktail.registerProcessors({
+        cocktail.clearProcessors();
+        cocktail.registerProcessors({
             '@merge': MergeSpy
         });
     });
 
     afterEach(function(){
-        Cocktail.restoreDefaultProcessors();
+        cocktail.restoreDefaultProcessors();
     });
 
 
@@ -42,11 +42,11 @@ describe('Cocktail', function(){
         var Processor = function(){};    
 
         it('Adds new processor/s to registered processors list', function(){
-            Cocktail.registerProcessors({
+            cocktail.registerProcessors({
                 '@processor': Processor
             });
 
-            expect(Cocktail.getProcessors()).to.have.property('@processor');
+            expect(cocktail.getProcessors()).to.have.property('@processor');
         });
 
     });
@@ -57,19 +57,19 @@ describe('Cocktail', function(){
 
         describe('mix()', function(){
             it('returns `undefined` if no args are passed.', function(){
-                expect(Cocktail.mix()).to.be.an('undefined');
+                expect(cocktail.mix()).to.be.an('undefined');
             });
         });
         
         describe('mix({Class} MyClass)', function(){
             it('returns the same MyClass if no other arguments are specified.', function(){
-                expect(Cocktail.mix(MyClass)).to.be.equal(MyClass);
+                expect(cocktail.mix(MyClass)).to.be.equal(MyClass);
             });
         });
 
         describe('mix({Object} anObject)', function(){
             it('returns the same anObject if no other arguments are specified.', function(){
-                expect(Cocktail.mix(anObject)).to.be.equal(anObject);
+                expect(cocktail.mix(anObject)).to.be.equal(anObject);
             });
         });
 
@@ -78,7 +78,7 @@ describe('Cocktail', function(){
             it('returns the a class if one single argument is specified with constructor.', function(){
                 var sut;
 
-                sut = Cocktail.mix({
+                sut = cocktail.mix({
                     constructor: function() {}
                 });
 
@@ -89,7 +89,7 @@ describe('Cocktail', function(){
                 var MyClass = function(){},
                     sut;
 
-                sut = Cocktail.mix({
+                sut = cocktail.mix({
                     '@extends': MyClass
                 });
 
@@ -102,7 +102,7 @@ describe('Cocktail', function(){
 
                 MyTrait.prototype.method = function(){};
 
-                sut = Cocktail.mix({
+                sut = cocktail.mix({
                     '@traits': [MyTrait]
                 });
 
@@ -113,7 +113,7 @@ describe('Cocktail', function(){
             it('constructor defined in the classDefinition should not be enumerable.', function(){
                 var sut;
 
-                sut = Cocktail.mix({
+                sut = cocktail.mix({
                     constructor: function() {
                     }
                 });
@@ -137,7 +137,7 @@ describe('Cocktail', function(){
                         property : 1
                     };
 
-                expect(Cocktail.mix(MyClass, proto)).to.be.a('function');
+                expect(cocktail.mix(MyClass, proto)).to.be.a('function');
 
                 expect(mergeSetParameterSpy).to.be.calledWith("single");
                 expect(mergeProcessSpy).to.be.calledWith(MyClass, proto);
@@ -156,7 +156,7 @@ describe('Cocktail', function(){
                         property : 1
                     };
 
-                expect(Cocktail.mix(anObject, proto)).to.be.an('object');
+                expect(cocktail.mix(anObject, proto)).to.be.an('object');
 
                 expect(mergeSetParameterSpy).to.be.calledWith("single");
                 expect(mergeProcessSpy).to.be.calledWith(anObject, proto);
@@ -170,7 +170,7 @@ describe('Cocktail', function(){
  
             it('calls merge processor with MyClass and proto and uses the merge strategy defined by `@merge`', function(){
                 expect(
-                    Cocktail.mix(MyClass, {
+                    cocktail.mix(MyClass, {
                         '@merge': strategy,
                         property: 1
                     })

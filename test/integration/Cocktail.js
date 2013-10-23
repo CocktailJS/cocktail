@@ -4,24 +4,24 @@ var chai = require("chai"),
     sinon = require("sinon"),
     sinonChai = require("sinon-chai"),
     expect = chai.expect,
-    Cocktail = require('../../lib/Cocktail'),
+    cocktail = require('../../lib/cocktail'),
     RestoreProcessors = require('../helper/RestoreProcessors');
 
 chai.use(sinonChai);
 
-Cocktail.mix(Cocktail, {
+cocktail.mix(cocktail, {
     '@talents': [RestoreProcessors]
 });
 
 
-describe('Cocktail Integration Test', function(){
+describe('cocktail Integration Test', function(){
 
     beforeEach(function(){
-        Cocktail.restoreDefaultProcessors();
+        cocktail.restoreDefaultProcessors();
     });
 
     afterEach(function(){
-        Cocktail.restoreDefaultProcessors();
+        cocktail.restoreDefaultProcessors();
     });
 
     describe('`@merge` annotation adds the properties and methods in the options to the given subject', function(){
@@ -38,7 +38,7 @@ describe('Cocktail Integration Test', function(){
         });
 
         it('merges the properties and methods into the subject prototype when subject is a class', function(){
-            Cocktail.mix(ClassA, {
+            cocktail.mix(ClassA, {
                 method: aMethod,
                 property: aProperty
             });
@@ -48,7 +48,7 @@ describe('Cocktail Integration Test', function(){
         });
 
         it('merges the properties and methods into the subject when subject is an object', function(){
-            Cocktail.mix(anObject, {
+            cocktail.mix(anObject, {
                 method: aMethod,
                 property: aProperty
             });
@@ -58,12 +58,12 @@ describe('Cocktail Integration Test', function(){
         });
 
         it('a `@merge` annotation is added by default if it is no specified', function(){
-            Cocktail.mix(ClassA, {
+            cocktail.mix(ClassA, {
                 method: aMethod,
                 property: aProperty
             });
 
-            Cocktail.mix(ClassAA, {
+            cocktail.mix(ClassAA, {
                 '@merge': 'single', 
                 method: aMethod,
                 property: aProperty
@@ -81,7 +81,7 @@ describe('Cocktail Integration Test', function(){
             ClassA.prototype.oValue = 1;
             ClassA.prototype.oMethod = function o(){};
 
-            Cocktail.mix(ClassA, {
+            cocktail.mix(ClassA, {
                 //'@merge': 'single', //default value
                 oValue  : aProperty,
                 oMethod : aMethod
@@ -106,7 +106,7 @@ describe('Cocktail Integration Test', function(){
         });
 
         it('adds a getter/setter method and set the value for each property to the subject prototype when subject is a class', function(){
-            Cocktail.mix(ClassA, {
+            cocktail.mix(ClassA, {
                 '@properties': {
                     value: 1,
                     name : 'name'
@@ -128,7 +128,7 @@ describe('Cocktail Integration Test', function(){
         });
 
         it('adds a getter/setter method and set the value for each property to the subject when subject is an object', function(){
-            Cocktail.mix(anObject, {
+            cocktail.mix(anObject, {
                 '@properties': {
                     value: 1,
                     name : 'name'
@@ -145,7 +145,7 @@ describe('Cocktail Integration Test', function(){
         });
 
         it('if the property is a boolean a isXXX() method is created instead of the getter', function(){
-            Cocktail.mix(ClassA, {
+            cocktail.mix(ClassA, {
                 '@properties': {
                     valid: false
                 }
@@ -165,7 +165,7 @@ describe('Cocktail Integration Test', function(){
         it('adds a getter/setter method and set the value for each property to the subject prototype when subject is a class definition', function(){
             var ClassA;
 
-            ClassA = Cocktail.mix({
+            ClassA = cocktail.mix({
 
                 constructor: function(){
                     //do smth
@@ -208,7 +208,7 @@ describe('Cocktail Integration Test', function(){
         });
 
         it('makes methods and properties from base available on the given subject', function(){
-            Cocktail.mix(ClassA, {
+            cocktail.mix(ClassA, {
                 '@extends': Base
             });
 
@@ -222,7 +222,7 @@ describe('Cocktail Integration Test', function(){
         });
 
         it('methods and properties can be overriden in the subject', function(){
-            Cocktail.mix(ClassA, {
+            cocktail.mix(ClassA, {
                 '@extends': Base,
 
                 aMethod: function(){}
@@ -243,7 +243,7 @@ describe('Cocktail Integration Test', function(){
             var anObject = {};
             
             expect(function(){
-                Cocktail.mix(ClassA, {
+                cocktail.mix(ClassA, {
                     '@extends': anObject
                 });
             }).to.throw(Error);            
@@ -251,7 +251,7 @@ describe('Cocktail Integration Test', function(){
         });
 
         it('adds a `callSuper` method so an overriden method can be called', function(){
-            Cocktail.mix(ClassA, {
+            cocktail.mix(ClassA, {
                 '@extends': Base,
 
                 aMethod: function(param){
@@ -280,7 +280,7 @@ describe('Cocktail Integration Test', function(){
         //         }),
         //         param = 1;
 
-        //     Cocktail.mix(ClassB, {
+        //     cocktail.mix(ClassB, {
         //         '@extends': Base
         //     });
 
@@ -290,7 +290,7 @@ describe('Cocktail Integration Test', function(){
         // });
 
         it('makes methods and properties from base available on the given subject when subject is a class definition', function(){
-            ClassA = Cocktail.mix({
+            ClassA = cocktail.mix({
                 '@extends': Base
             });
 
@@ -318,7 +318,7 @@ describe('Cocktail Integration Test', function(){
         it('adds the current definition as a custom annotation', function(){
             var customValue = 1;
 
-            Cocktail.mix(Custom, {
+            cocktail.mix(Custom, {
                 '@annotation': 'custom',
 
                 setParameter: aSetter,
@@ -326,7 +326,7 @@ describe('Cocktail Integration Test', function(){
             });
 
 
-            Cocktail.mix(Subject, {
+            cocktail.mix(Subject, {
                 '@custom': customValue
             });
 
@@ -338,7 +338,7 @@ describe('Cocktail Integration Test', function(){
         it('adds the current class definition as a custom annotation', function(){
             var customValue = 1;
 
-            Cocktail.mix({
+            cocktail.mix({
                 '@annotation': 'custom',
 
                 setParameter: aSetter,
@@ -346,7 +346,7 @@ describe('Cocktail Integration Test', function(){
             });
 
 
-            Cocktail.mix(Subject, {
+            cocktail.mix(Subject, {
                 '@custom': customValue
             });
 
@@ -358,14 +358,14 @@ describe('Cocktail Integration Test', function(){
         it('if annotation already exists it gets overriden by the current definition as a custom annotation', function(){
             var customValue = 1;
 
-            Cocktail.mix(Custom, {
+            cocktail.mix(Custom, {
                 '@annotation': 'traits',
 
                 setParameter: aSetter,
                 process: aProcess
             });
 
-            Cocktail.mix(Subject, {
+            cocktail.mix(Subject, {
                 '@traits': customValue
             });
 
@@ -378,14 +378,14 @@ describe('Cocktail Integration Test', function(){
             var customValue = 1;
 
 
-            Cocktail.mix({
+            cocktail.mix({
                 '@annotation': 'custom',
 
                 setParameter: aSetter,
                 process: function(){
                     var proto = {};
 
-                    Cocktail.mix(proto, {
+                    cocktail.mix(proto, {
                         '@merge': 'mine',
                         a: 2,
                     });
@@ -393,7 +393,7 @@ describe('Cocktail Integration Test', function(){
             });
 
 
-            Cocktail.mix(Subject, {
+            cocktail.mix(Subject, {
                 '@custom': customValue
             });
 
@@ -410,7 +410,7 @@ describe('Cocktail Integration Test', function(){
                 exports: undefined
             };
 
-            Cocktail.mix(Custom, {
+            cocktail.mix(Custom, {
                 '@exports': module,
                 
                 some: 'a',
@@ -427,7 +427,7 @@ describe('Cocktail Integration Test', function(){
                 exports: undefined
             };
 
-            Cocktail.mix({
+            cocktail.mix({
                 '@exports': module,
                 
                 constructor: function() {/*Body*/},
@@ -448,7 +448,7 @@ describe('Cocktail Integration Test', function(){
             var method = function(){},
                 ClassA, instance;
 
-            ClassA = Cocktail.mix({
+            ClassA = cocktail.mix({
                 '@as'    : 'class',
                 '@static': {
                     method: method
@@ -468,7 +468,7 @@ describe('Cocktail Integration Test', function(){
             var property = 'property',
                 ClassA, instance;
 
-            ClassA = Cocktail.mix({
+            ClassA = cocktail.mix({
                 '@as'    : 'class',
                 '@static': {
                     property: property
@@ -499,7 +499,7 @@ describe('Cocktail Integration Test', function(){
                 value : value
             };
 
-            sut = Cocktail.mix({
+            sut = cocktail.mix({
                 '@extends': MyClass
             });
 
@@ -514,7 +514,7 @@ describe('Cocktail Integration Test', function(){
 
             MyTrait.prototype.method = function(){};
 
-            sut = Cocktail.mix({
+            sut = cocktail.mix({
                 '@traits': [MyTrait]
             });
 
@@ -527,7 +527,7 @@ describe('Cocktail Integration Test', function(){
         it('returns a class if one single argument is specified with a @as annotation with a "class" value.', function(){
             var sut;
 
-            sut = Cocktail.mix({
+            sut = cocktail.mix({
                 '@as': 'class',
 
                 method: function() {}
@@ -542,7 +542,7 @@ describe('Cocktail Integration Test', function(){
         it('did not return a class if one single argument is specified with a @as annotation with a value different of "class".', function(){
             var sut;
 
-            sut = Cocktail.mix({
+            sut = cocktail.mix({
                 '@as': 'SomethingElse',
 
                 method: function() {}
@@ -560,7 +560,7 @@ describe('Cocktail Integration Test', function(){
             var value = 1,
                 Parent, Class, sut;
 
-            Parent = Cocktail.mix({
+            Parent = cocktail.mix({
                 '@as': 'class',
 
                 constructor: function(option){
@@ -569,7 +569,7 @@ describe('Cocktail Integration Test', function(){
                 }
             });
 
-            Class = Cocktail.mix({
+            Class = cocktail.mix({
                 '@as': 'class',
                 '@extends': Parent                
             });

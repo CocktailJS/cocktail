@@ -4,7 +4,7 @@ var chai = require("chai"),
     sinon = require("sinon"),
     sinonChai = require("sinon-chai"),
     expect = chai.expect,
-    Cocktail = require('../../../../lib/Cocktail'),
+    cocktail = require('../../../../lib/cocktail'),
     proxyquire = require("proxyquire");
 
 chai.use(sinonChai);
@@ -15,7 +15,7 @@ describe('Annotation Processor @annotation', function(){
         sut;
 
     Annotation =  proxyquire('../../../../lib/processor/annotation/Annotation.js', {
-        '../../Cocktail': {registerProcessors: registerProcessors}
+        '../../cocktail': {registerProcessors: registerProcessors}
     });
 
     sut = new Annotation();
@@ -24,8 +24,8 @@ describe('Annotation Processor @annotation', function(){
         expect(sut.retain).to.equal(false);
     });
 
-    it('has priority set to Cocktail.SEQUENCE.ANNOTATION', function(){
-        expect(sut.priority).to.equal(Cocktail.SEQUENCE.ANNOTATION);
+    it('has priority set to cocktail.SEQUENCE.ANNOTATION', function(){
+        expect(sut.priority).to.equal(cocktail.SEQUENCE.ANNOTATION);
     });
 
     describe('Parameter for @annotation annotation', function(){
@@ -42,7 +42,7 @@ describe('Annotation Processor @annotation', function(){
     describe('Annotation process', function(){
         var name = 'custom';
 
-        describe('registers the subject as a processor in Cocktail', function(){
+        describe('registers the subject as a processor in cocktail', function(){
 
             it('adds a new processor in the form of `@`+parameter', function(){
                 var Subject = function(){};

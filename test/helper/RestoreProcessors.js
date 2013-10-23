@@ -5,16 +5,16 @@
  */
  'use strict';
 
-var Cocktail = require('../../lib/Cocktail');
+var cocktail = require('../../lib/cocktail');
 
 /**
  * @Talent
  * @Trait
- * RestoreProcessors is a talent to provide Cocktail a way to restore the modified processors list
+ * RestoreProcessors is a talent to provide cocktail a way to restore the modified processors list
  * back to the default configuration.
  * We separate this behavior since it might be used ONLY for TESTS.
  */
-Cocktail.mix({
+cocktail.mix({
 	'@exports': module,
 
 	'@requires': [

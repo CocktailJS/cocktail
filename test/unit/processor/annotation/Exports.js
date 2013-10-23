@@ -4,7 +4,7 @@ var chai = require("chai"),
     // sinon = require("sinon"),
     // sinonChai = require("sinon-chai"),
     expect = chai.expect,
-    Cocktail = require('../../../../lib/Cocktail'),
+    cocktail = require('../../../../lib/cocktail'),
     Exports = require('../../../../lib/processor/annotation/Exports.js');
 
 // chai.use(sinonChai);
@@ -16,8 +16,8 @@ describe('Annotation Processor @exports', function(){
         expect(sut.retain).to.equal(false);
     });
 
-    it('has priority set to Cocktail.SEQUENCE.EXPORTS', function(){
-        expect(sut.priority).to.equal(Cocktail.SEQUENCE.EXPORTS);
+    it('has priority set to cocktail.SEQUENCE.EXPORTS', function(){
+        expect(sut.priority).to.equal(cocktail.SEQUENCE.EXPORTS);
     });
 
     describe('Parameter for @exports annotation', function(){

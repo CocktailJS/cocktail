@@ -1,5 +1,5 @@
 # Cocktail JS 
-[![Build Status](https://travis-ci.org/CocktailJS/Cocktail.png?branch=master)](https://travis-ci.org/CocktailJS/Cocktail)
+[![Build Status](https://travis-ci.org/CocktailJS/cocktail.png?branch=master)](https://travis-ci.org/CocktailJS/Cocktail)
 [![NPM version](https://badge.fury.io/js/cocktail.png)](http://badge.fury.io/js/cocktail)
 
 Cocktail is a small but yet powerful library with very simple principles:
@@ -16,15 +16,15 @@ Cocktail explores three mechanisms to share/reuse/mix code:
 
 
 ##Keep it simple
-Cocktail has only one public method `Cocktail.mix()` but it relies on `annotations` to tag some meta-data that describe the mix.
+Cocktail has only one public method `cocktail.mix()` but it relies on `annotations` to tag some meta-data that describe the mix.
 
 ###Annotations
 Annotations are simple meta-data Cocktail uses to perform some tasks over the given mix. They become part of the process but usually they are not kept in the result of a mix.
 
-	var Cocktail = require('Cocktail'),
+	var cocktail = require('cocktail'),
 		MyClass  = function(){};
 		
-	Cocktail.mix(MyClass, {
+	cocktail.mix(MyClass, {
 		'@properties': {
 			name: 'default name'
 		}
@@ -40,10 +40,10 @@ export the result of the mix with one annotation so you don't forget `module.exp
 
 MyClass.js
 
-    var Cocktail = require('Cocktail'),
+    var cocktail = require('cocktail'),
         MySuperClass = require('./MySuperClass');
 
-    Cocktail.mix({
+    cocktail.mix({
         '@extends': MySuperClass,
         '@exports': module,
         '@properties' : {
@@ -57,9 +57,9 @@ a Class using `@as` passing a value of `class`:
 
 MySuperClass.js
 
-    var Cocktail = require('Cocktail')
+    var cocktail = require('cocktail')
 
-    Cocktail.mix({
+    cocktail.mix({
         '@exports' : module,
         '@as'      : 'class',
 
@@ -72,7 +72,7 @@ MySuperClass.js
 ## Getting Started
 
 - Install the module with: `npm install cocktail` or add cocktail to your `package.json` and then `npm install`
-- Start playing by just adding a `var Cocktail = require('Cocktail')` in your file.
+- Start playing by just adding a `var cocktail = require('cocktail')` in your file.
 
 ## Guides
 Guides can be found at [CocktailJS Guides](http://cocktailjs.github.io/guides/)

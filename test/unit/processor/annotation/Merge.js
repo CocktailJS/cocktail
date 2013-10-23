@@ -1,7 +1,7 @@
 'use strict';
 
 var expect = require('chai').expect,
-    Cocktail = require('../../../../lib/Cocktail'),
+    cocktail = require('../../../../lib/cocktail'),
     Merge = require('../../../../lib/processor/annotation/Merge.js');
 
 describe('Annotation Processor @merge', function(){
@@ -11,8 +11,8 @@ describe('Annotation Processor @merge', function(){
         expect(sut.retain).to.equal(false);
     });
 
-    it('has priority set to Cocktail.SEQUENCE.MERGE', function(){
-        expect(sut.priority).to.equal(Cocktail.SEQUENCE.MERGE);
+    it('has priority set to cocktail.SEQUENCE.MERGE', function(){
+        expect(sut.priority).to.equal(cocktail.SEQUENCE.MERGE);
     });
 
     describe('Parameter for @merge annotation', function(){
