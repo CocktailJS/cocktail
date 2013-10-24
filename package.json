@@ -1,7 +1,7 @@
 {
   "name": "cocktail",
   "description": "CocktailJS is a small library to explore traits, talents, inheritance and annotations concepts in nodejs - Shake your objects and classes with Cocktail!",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "homepage": "http://cocktailjs.github.io",
   "author": {
     "name": "Maximiliano Fierro",
@@ -10,19 +10,19 @@
   "licenses": [
     {
       "type": "MIT",
-      "url": "/blob/master/LICENSE-MIT"
+      "url": "https://github.com/CocktailJS/cocktail/blob/master/LICENSE-MIT"
     }
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/CocktailJS/Cocktail.git"
+    "url": "https://github.com/CocktailJS/cocktail.git"
   },
   "bugs": {
-    "url": "https://github.com/CocktailJS/Cocktail/issues"
+    "url": "https://github.com/CocktailJS/cocktail/issues"
   },
   "main": "lib/cocktail",
   "engines": {
-    "node": ">= 0.6.0"
+    "node": ">= 0.8.0"
   },
   "scripts": {
     "test": "grunt test"
