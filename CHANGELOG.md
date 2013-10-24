@@ -1,5 +1,9 @@
 ##CHANGE LOG
 
+- 0.4.5
+    - status: Alpha
+    - Fixed issue with Traits/Talents required methods check with traits defined in different modules.
+
 - 0.4.4
     - status: Alpha
     - Renamed file lib/Cocktail.js to lib/cocktail.js to agree on module name conventions.
