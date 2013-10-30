@@ -1,6 +1,5 @@
 # Cocktail JS 
 [![Build Status](https://travis-ci.org/CocktailJS/cocktail.png?branch=master)](https://travis-ci.org/CocktailJS/cocktail)
-[![Coverage Status](https://coveralls.io/repos/CocktailJS/cocktail/badge.png)](https://coveralls.io/r/CocktailJS/cocktail)
 [![NPM version](https://badge.fury.io/js/cocktail.png)](http://badge.fury.io/js/cocktail)
 
 Cocktail is a small but yet powerful library with very simple principles:
