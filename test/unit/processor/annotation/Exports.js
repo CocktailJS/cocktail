@@ -52,5 +52,47 @@ describe('Annotation Processor @exports', function(){
             });
 
         });
+
+        describe('Do not exports the subject as `exports` property if the given parameter is not a module object', function(){
+            var sut = new Exports(),
+                BaseClass = function(){},
+                module;
+
+
+            it('does not exports the subject if the parameter is false', function(){
+                module = false;
+
+                sut.setParameter(module);
+
+                sut.process(BaseClass);
+
+                expect(module).to.not.have.property('exports');
+
+            });
+
+            it('does not exports the subject if the parameter is true', function(){
+                module = true;
+
+                sut.setParameter(module);
+
+                sut.process(BaseClass);
+
+                expect(module).to.not.have.property('exports');
+
+            });
+
+            it('does not exports the subject if the parameter is null', function(){
+                module = null;
+
+                sut.setParameter(module);
+
+                sut.process(BaseClass);
+
+                expect(module).to.be.equal(null);
+
+            });
+
+        });
+
     });
 });

@@ -83,6 +83,10 @@ describe('Annotation Processor @extends', function(){
             MyClass.prototype.foo = function(args){
                 return this.callSuper('foo', args);
             };
+
+            MyClass.prototype.noSuper = function(args){
+                return this.callSuper('noSuper', args);
+            };
             myInstance = new MyClass();
 
             it('Parent method is called when using this.callSuper(`methodName`)', function(){
@@ -106,6 +110,11 @@ describe('Annotation Processor @extends', function(){
                 expect(foo).to.have.returned('123');
                 expect(ret).to.be.equal('123');
             });
+
+            it('should throw exception if parent class has no method', function(){
+                expect(function(){myInstance.noSuper();}).to.throw(Error);
+            });
+
         });
     });
 
