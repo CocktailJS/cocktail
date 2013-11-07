@@ -1,5 +1,9 @@
 ##CHANGE LOG
 
+- 0.4.6
+    - status: Alpha
+    - Fixed issue with Traits/Talents throwing errors on excluded/aliased methods. See #13.
+
 - 0.4.5
     - status: Alpha
     - Fixed issue with Traits/Talents required methods check with traits defined in different modules.
