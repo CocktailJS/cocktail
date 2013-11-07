@@ -233,6 +233,52 @@ describe('Annotation Processor @traits', function(){
                 expect(MyClass.prototype.aReqMethod).to.not.be.equal(Requires.requiredMethod);
                 expect(MyClass.prototype.aReqMethod).to.be.equal(anotherMethod);
             });
+
+        });
+
+        describe('Non Conflicts between TraitA and MyClass with alias', function(){
+            var sut = new Traits(),
+                TraitA = function(){},
+                MyClass = function(){},
+                sameMethod = function(){},
+                anotherMethod = function anotherMethod(){};
+
+            TraitA.prototype.sameMethod = sameMethod;                
+            TraitA.prototype.aMethod = Requires.requiredMethod;
+            TraitA.prototype.aReqMethod = anotherMethod;
+
+
+            MyClass.prototype.sameMethod = function() {};
+            sut.setParameter([{trait: TraitA, alias: {sameMethod: 'myAnother'}}]);
+
+            it('does not generate conflict if the method is aliased in the host class', function(){
+                expect(function(){sut.process(MyClass);}).not.to.throw(Error, /aMethod is defined in trait and Class/);
+                expect(MyClass).to.respondTo('sameMethod');
+                expect(MyClass).to.respondTo('myAnother');
+            });
+
+        });
+
+        describe('Non Conflicts between TraitA and MyClass with excluded methods', function(){
+            var sut = new Traits(),
+                TraitA = function(){},
+                MyClass = function(){},
+                sameMethod = function(){},
+                anotherMethod = function anotherMethod(){};
+
+            TraitA.prototype.sameMethod = sameMethod;                
+            TraitA.prototype.aMethod = Requires.requiredMethod;
+            TraitA.prototype.aReqMethod = anotherMethod;
+
+
+            MyClass.prototype.sameMethod = function() {};
+            sut.setParameter([{trait: TraitA, excludes: ['sameMethod']}]);
+
+            it('does not generate conflict if the method is aliased in the host class', function(){
+                expect(function(){sut.process(MyClass);}).not.to.throw(Error, /aMethod is defined in trait and Class/);
+                expect(MyClass).to.respondTo('sameMethod');
+            });
+
         });
 
         describe('Conflicts between TraitA and MyClass', function(){
