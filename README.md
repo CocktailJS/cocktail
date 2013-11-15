@@ -1,4 +1,5 @@
 # Cocktail JS 
+
 [![Build Status](https://travis-ci.org/CocktailJS/cocktail.png?branch=master)](https://travis-ci.org/CocktailJS/cocktail)
 [![NPM version](https://badge.fury.io/js/cocktail.png)](http://badge.fury.io/js/cocktail)
 [![Code Climate](https://codeclimate.com/github/CocktailJS/cocktail.png)](https://codeclimate.com/github/CocktailJS/cocktail)
