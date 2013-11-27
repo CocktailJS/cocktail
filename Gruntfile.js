@@ -15,12 +15,7 @@ module.exports = function(grunt) {
         src: ['lib/**/*.js']
       },
       test: {
-        src: ['test/**/*.js'],
-        options: {
-            es5: true,
-            expr: true,
-            globals: {describe: true, it: true, expect: true, define: true, beforeEach: true, afterEach: true}
-        }
+        src: ['test/**/*.js']
       }
     },
 

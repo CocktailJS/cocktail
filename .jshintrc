@@ -11,7 +11,7 @@
   "boss": true,
   "eqnull": true,
   "node": true,
-  "es5": true,
+  "expr": true,
   "predef": [
     "describe",         
     "it",               
