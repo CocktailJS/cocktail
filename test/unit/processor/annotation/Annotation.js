@@ -1,22 +1,15 @@
 'use strict';
 
 var chai = require("chai"),
-    sinon = require("sinon"),
     sinonChai = require("sinon-chai"),
     expect = chai.expect,
     cocktail = require('../../../../lib/cocktail'),
-    proxyquire = require("proxyquire");
+    Annotation = require('../../../../lib/processor/annotation/Annotation.js');
 
 chai.use(sinonChai);
 
 describe('Annotation Processor @annotation', function(){
-    var Annotation,
-        registerProcessors = sinon.spy(),
-        sut;
-
-    Annotation =  proxyquire('../../../../lib/processor/annotation/Annotation.js', {
-        '../../cocktail': {registerProcessors: registerProcessors}
-    });
+    var sut;
 
     sut = new Annotation();
 
@@ -48,9 +41,9 @@ describe('Annotation Processor @annotation', function(){
                 var Subject = function(){};
 
                 sut.setParameter(name);
-                sut.process(Subject);
+                sut.process(Subject, Subject.prototype);
 
-                expect(registerProcessors).to.have.been.calledWith({'@custom': Subject});
+                expect(Subject.prototype).to.have.property('name');
             });
         });
 
