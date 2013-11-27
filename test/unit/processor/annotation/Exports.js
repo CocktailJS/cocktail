@@ -1,13 +1,10 @@
 'use strict';
 
 var chai = require("chai"),
-    // sinon = require("sinon"),
-    // sinonChai = require("sinon-chai"),
     expect = chai.expect,
     cocktail = require('../../../../lib/cocktail'),
     Exports = require('../../../../lib/processor/annotation/Exports.js');
 
-// chai.use(sinonChai);
 
 describe('Annotation Processor @exports', function(){
     var sut = new Exports();
