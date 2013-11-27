@@ -32,7 +32,7 @@
     "chai": "1.4.2",
     "mocha": "1.8.1",
     "grunt-mocha": "0.2.1",
-    "grunt-contrib-jshint": "~0.1.1",
+    "grunt-contrib-jshint": "~0.7.2",
     "grunt-contrib-watch": "~0.2.0",
     "grunt": "~0.4.1",
     "sinon-chai": "~2.3.1",
