@@ -183,4 +183,45 @@ describe('cocktail', function(){
         });
 
     });
+
+    describe('Use', function(){
+
+        describe('use(Class)', function(){
+            var MyAnnotation = function(){},
+                processors;
+
+            it('adds MyAnnotation Class as a custom processor', function(){
+                MyAnnotation.prototype.name = '@myannotation';
+
+                cocktail.use(MyAnnotation);
+
+                processors = cocktail.getProcessors();
+
+                expect(processors).to.have.property('@myannotation');
+
+                expect(processors['@myannotation']).to.be.equal(MyAnnotation);
+
+            });
+
+        });
+
+
+        describe('use(Object)', function(){
+            var MyAnnotation = {name: '@myannotation'},
+                processors;
+
+            it('does not add MyAnnotation Object as a custom processor', function(){
+                cocktail.use(MyAnnotation);
+
+                processors = cocktail.getProcessors();
+
+                expect(processors).to.not.have.property('@myannotation');
+
+                expect(processors['@myannotation']).to.be.equal(undefined);
+
+            });
+
+        });
+
+    });
 });

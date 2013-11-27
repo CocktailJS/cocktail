@@ -97,6 +97,37 @@ describe('Annotation Processor @properties', function(){
 
             });
 
+            it('its setters modify the property and it is returned by its getter', function(){
+                var instance  = new MyClass(),
+                    stringVal = 'VALUE';
+
+                instance.setName(stringVal);
+
+                expect(instance.name).to.be.equal(stringVal);
+                expect(instance.getName()).to.be.equal(stringVal);
+            });
+        });
+
+        describe('Does nothing if parameter is not a plain and non empty object', function(){
+            var sut     = new Properties(),
+                MyClass = function(){};
+
+
+            it('keeps the prototype untouched if no property is defined in the param', function(){
+                sut.setParameter({});
+                sut.process(MyClass);
+                expect(MyClass.prototype).to.be.empty;
+            });
+
+            it('keeps the prototype untouched if param is not a plain object', function(){
+                var CustomClass = function() {};
+
+                CustomClass.prototype.value = 1;
+
+                sut.setParameter(new CustomClass());
+                sut.process(MyClass);
+                expect(MyClass.prototype).to.be.empty;
+            });
 
 
         });
