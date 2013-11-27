@@ -1,5 +1,11 @@
 ##CHANGE LOG
 
+- 0.5.0
+    - status: Alpha
+    - Added new method to register custom annotations (cocktail.use())
+    - Refactored `@annotation` processor.
+    - Small code improvements and tests.
+
 - 0.4.6
     - status: Alpha
     - Fixed issue with Traits/Talents throwing errors on excluded/aliased methods. See #13.
