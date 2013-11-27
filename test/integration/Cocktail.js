@@ -305,46 +305,33 @@ describe('cocktail Integration Test', function(){
 
     });
 
-    describe('`@annotation` annotation registers the current mix as a custom annotation', function(){
+    describe('`@annotation` annotation and cocktail.use() to register a custom annotation', function(){
         var Custom = function(){},
             Subject,
             aProcess = sinon.spy(),
             aSetter = sinon.spy();
 
         beforeEach(function(){
+            Custom = function(){};
             Subject = function(){};
         });
 
-        it('adds the current definition as a custom annotation', function(){
-            var customValue = 1;
+        it('adds custom annotation definition using cocktail.use()', function(){
+            var annotationName = 'custom',
+                customValue = 1;
 
             cocktail.mix(Custom, {
-                '@annotation': 'custom',
+                '@annotation': annotationName,
 
                 setParameter: aSetter,
                 process: aProcess
             });
 
 
-            cocktail.mix(Subject, {
-                '@custom': customValue
-            });
+            expect(Custom.prototype).to.have.property('name');
+            expect(Custom.prototype.name).to.be.equal('@'+annotationName);
 
-            expect(aSetter).to.have.been.calledWith(customValue);
-            expect(aProcess).to.have.been.calledWith(Subject);
-
-        });
-
-        it('adds the current class definition as a custom annotation', function(){
-            var customValue = 1;
-
-            cocktail.mix({
-                '@annotation': 'custom',
-
-                setParameter: aSetter,
-                process: aProcess
-            });
-
+            cocktail.use(Custom);
 
             cocktail.mix(Subject, {
                 '@custom': customValue
@@ -365,6 +352,9 @@ describe('cocktail Integration Test', function(){
                 process: aProcess
             });
 
+
+            cocktail.use(Custom);
+
             cocktail.mix(Subject, {
                 '@traits': customValue
             });
@@ -378,7 +368,7 @@ describe('cocktail Integration Test', function(){
             var customValue = 1;
 
 
-            cocktail.mix({
+            cocktail.mix(Custom, {
                 '@annotation': 'custom',
 
                 setParameter: aSetter,
@@ -391,6 +381,8 @@ describe('cocktail Integration Test', function(){
                     });
                 }
             });
+
+            cocktail.use(Custom);
 
 
             cocktail.mix(Subject, {
