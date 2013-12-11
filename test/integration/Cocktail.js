@@ -270,24 +270,24 @@ describe('cocktail Integration Test', function(){
             expect(aMethod).to.have.been.calledWith(1);
         });
 
-        // TODO: The constructor is being called successfully, but cannot make the assertion to work properly
-        // it('`callSuper` method in the constructor calls parent constructor', function(){
-        //     var ClassB = function(param){
-        //             this.callSuper('constructor', param);
-        //         },
-        //         Base = sinon.spy(function(){
-        //             console.log('called!');
-        //         }),
-        //         param = 1;
+        it('`callSuper` method in the constructor calls parent constructor', function(){
+            var ClassB,
+                param = 1;
 
-        //     cocktail.mix(ClassB, {
-        //         '@extends': Base
-        //     });
+            Base.prototype.constructor = sinon.spy();
+            
+            ClassB = cocktail.mix({
+                '@extends': Base,
 
-        //     instanceA = new ClassB(param);
+                constructor: function(param){
+                    this.callSuper('constructor', param);
+                }
+            });
 
-        //     expect(Base).to.have.been.calledWith(param);
-        // });
+            instanceA = new ClassB(param);
+
+            expect(Base.prototype.constructor).to.have.been.calledWith(param);
+        });
 
         it('makes methods and properties from base available on the given subject when subject is a class definition', function(){
             ClassA = cocktail.mix({
