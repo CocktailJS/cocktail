@@ -113,5 +113,5 @@ Run
 see [CHANGELOG](https://github.com/CocktailJS/cocktail/blob/master/CHANGELOG.md)
 
 ## License
-Copyright (c) 2013 Maximiliano Fierro  
+Copyright (c) 2013 - 2014 Maximiliano Fierro  
 Licensed under the MIT license.
