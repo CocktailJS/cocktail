@@ -531,6 +531,21 @@ describe('cocktail Integration Test', function(){
 
         });
 
+        it('returns a module if one single argument is specified with a @as annotation with a "module" value.', function(){
+            var sut;
+
+            sut = cocktail.mix({
+                '@as': 'module',
+
+                method: function() {}
+            });
+
+            expect(sut).to.be.an('object');
+
+            expect(sut).to.respondTo('method');
+
+        });
+        
         it('did not return a class if one single argument is specified with a @as annotation with a value different of "class".', function(){
             var sut;
 
