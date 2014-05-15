@@ -31,13 +31,13 @@
     "grunt-simple-mocha": "~0.4",
     "chai": "1.9.1",
     "mocha": "1.18.2",
-    "grunt-mocha": "0.4.10",
     "grunt-contrib-jshint": "~0.10",
     "grunt-contrib-watch": "~0.6",
     "grunt": "~0.4",
     "sinon-chai": "~2.5",
     "sinon": "~1.9",
-    "grunt-cli": "~0.1.13"
+    "grunt-cli": "~0.1.13",
+    "grunt-mocha-test": "~0.10.2"
   },
   "keywords": [
     "oop",
