@@ -1,5 +1,13 @@
 ##CHANGE LOG
 
+- 0.5.2
+    - status: Alpha
+    - Fixed issue with `@properties` annotation to not override value when subject is an object and it has a property already defined with the same name. See #18.
+
+- 0.5.1
+    - status: Alpha
+    - Added 'module' as parameter in `@as` pseudo-annotation to export module as single object
+
 - 0.5.0
     - status: Alpha
     - Added new method to register custom annotations (cocktail.use())
