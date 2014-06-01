@@ -44,7 +44,7 @@ describe('Annotation Processor @properties', function(){
 
     describe('Properties process', function(){
 
-        describe('Creates getters and setters for the specified property', function(){
+        describe('Creates getters and setters for the specified property into the given Class', function(){
             var sut = new Properties(),
                 MyClass = function(){};
 
@@ -108,6 +108,69 @@ describe('Annotation Processor @properties', function(){
             });
         });
 
+        describe('Creates getters and setters for the specified property into the given Object', function(){
+            var sut = new Properties(),
+                myObject = {};
+
+            sut.setParameter({
+                'undef': undefined,
+                'nullVal': null,
+                'name': 'My Name',
+                'testBool': true,
+                'falsyBool': false,
+                'number': 1,
+                'falsyNumber' : 0
+            });
+            sut.process(myObject);
+
+            it('creates the property in the subject and sets the given value', function(){
+                expect(myObject.undef).to.be.equal(undefined);
+                expect(myObject.nullVal).to.be.equal(null);
+                expect(myObject.name).to.be.equal('My Name');
+                expect(myObject.testBool).to.be.equal(true);
+                expect(myObject.falsyBool).to.be.equal(false);
+                expect(myObject.number).to.be.equal(1);
+                expect(myObject.falsyNumber).to.be.equal(0);
+            });
+
+            it('creates getter and setter with setXXX getXXX for String, Numbers, Array, `null`, and `undefined` properties', function(){
+                expect(myObject).to.respondTo('setUndef');
+                expect(myObject).to.respondTo('getUndef');
+
+                expect(myObject).to.respondTo('setNullVal');
+                expect(myObject).to.respondTo('getNullVal');
+
+                expect(myObject).to.respondTo('setName');
+                expect(myObject).to.respondTo('getName');
+
+                expect(myObject).to.respondTo('setNumber');
+                expect(myObject).to.respondTo('getNumber');
+
+                expect(myObject).to.respondTo('setFalsyNumber');
+                expect(myObject).to.respondTo('getFalsyNumber');
+
+            });
+
+            it('creates getter as isXXX for boolean properties', function(){
+                expect(myObject).to.respondTo('setTestBool');
+                expect(myObject).to.respondTo('isTestBool');
+
+                expect(myObject).to.respondTo('setFalsyBool');
+                expect(myObject).to.respondTo('isFalsyBool');
+
+            });
+
+            it('its setters modify the property and it is returned by its getter', function(){
+                var instance  = myObject,
+                    stringVal = 'VALUE';
+
+                instance.setName(stringVal);
+
+                expect(instance.name).to.be.equal(stringVal);
+                expect(instance.getName()).to.be.equal(stringVal);
+            });
+        });
+
         describe('Does nothing if parameter is not a plain and non empty object', function(){
             var sut     = new Properties(),
                 MyClass = function(){};
@@ -128,9 +191,25 @@ describe('Annotation Processor @properties', function(){
                 sut.process(MyClass);
                 expect(MyClass.prototype).to.be.empty;
             });
-
-
         });
+
+        describe('Does not override value when processing an Object and property is already defined in the given object', function(){
+            var sut     = new Properties(),
+                value   = 'DEFINED',
+                myObj   = {alreadyDefined: value};
+
+            sut.setParameter({alreadyDefined: 'default'});
+            sut.process(myObj);
+
+            it('keeps the object value if it is already defined', function(){
+                expect(myObj.alreadyDefined).to.be.equal(value);
+            });
+
+            it('creates getter and setter for the alreadyDefined property', function(){
+                expect(myObj).to.respondTo('getAlreadyDefined');
+                expect(myObj).to.respondTo('setAlreadyDefined');
+            });
+        });        
     });    
 
 });

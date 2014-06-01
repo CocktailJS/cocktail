@@ -144,6 +144,25 @@ describe('cocktail Integration Test', function(){
 
         });
 
+        it('adds a getter/setter method but does not override value if property is already defined in the given object', function(){
+            anObject.name = 'Defined';
+
+            cocktail.mix(anObject, {
+                '@properties': {
+                    value: 1,
+                    name : 'name'
+                }
+            });
+
+            expect(anObject).to.respondTo('setName');
+            expect(anObject).to.respondTo('getName');
+            expect(anObject).to.respondTo('setValue');
+            expect(anObject).to.respondTo('getValue');
+            expect(anObject).to.have.property('value').that.equal(1);
+            expect(anObject).to.have.property('name').that.equal('Defined');
+        });
+
+
         it('if the property is a boolean a isXXX() method is created instead of the getter', function(){
             cocktail.mix(ClassA, {
                 '@properties': {
