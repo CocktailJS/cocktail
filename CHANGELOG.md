@@ -1,5 +1,9 @@
 ##CHANGE LOG
 
+- 0.5.3
+    - status: Alpha
+    - Fixed issue with `@talents` applied to a Class. See #19
+
 - 0.5.2
     - status: Alpha
     - Fixed issue with `@properties` annotation to not override value when subject is an object and it has a property already defined with the same name. See #18.
@@ -32,7 +36,7 @@
     - Fixed issue with mix being called from an annotation process.
     - Test added.
 
-- 0.4.2 
+- 0.4.2
     - status: Alpha
     - Fixed issue with constructor chain parameters.
     - Test added for constructor chain parameters.
@@ -55,7 +59,7 @@
 
 - 0.2.0
     - status: Alpha
-    - Added single parameter class/trait definition. If the first parameter is an object literal and it contains a 
+    - Added single parameter class/trait definition. If the first parameter is an object literal and it contains a
     constructor definition, or the annotation '@extends', '@traits', '@requires' or '@annotation' it will be treated as
     a class definition.
     - Tests for single parameter definition.
@@ -77,7 +81,7 @@
     - Added new merge strategies: mine (default -same as single), their, deep-mine and deep-their.
     - Test for Merge strategies.
 
-- 0.0.3 
+- 0.0.3
     - status: Alpha.
     - Annotation, traits, talents, extends, and properties features are stable and tested.
     - Adde custom Annotations definitions mechanism thru @annotation.
