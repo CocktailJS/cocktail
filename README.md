@@ -1,4 +1,4 @@
-# Cocktail JS 
+# Cocktail JS
 
 [![Build Status](https://travis-ci.org/CocktailJS/cocktail.png?branch=master)](https://travis-ci.org/CocktailJS/cocktail)
 [![NPM version](https://badge.fury.io/js/cocktail.png)](http://badge.fury.io/js/cocktail)
@@ -7,9 +7,9 @@
 Cocktail is a small but yet powerful library with very simple principles:
 
 - Reuse code
-- Keep it simple 
+- Keep it simple
 
-##Reuse code
+## Reuse code
 Cocktail explores three mechanisms to share/reuse/mix code:
 
 - **Extends**: Classical OOP inheritance implemented in Javascript.
@@ -17,58 +17,171 @@ Cocktail explores three mechanisms to share/reuse/mix code:
 - **Talents**: Same idea as Traits but applied to instances of a Class.
 
 
-##Keep it simple
+## Keep it simple
 Cocktail has only one public method `cocktail.mix()` but it relies on `annotations` to tag some meta-data that describe the mix.
 
-###Annotations
+## Annotations
 Annotations are simple meta-data Cocktail uses to perform some tasks over the given mix. They become part of the process but usually they are not kept in the result of a mix.
 
+```js
 	var cocktail = require('cocktail'),
 		MyClass  = function(){};
-		
+
 	cocktail.mix(MyClass, {
 		'@properties': {
 			name: 'default name'
 		}
-	});	
+	});
+```
 
 In the example above we created a "Class" named _MyClass_, and we use the `@properties` annotation to create the property _name_ and the corresponding _setName_ and _getName_ methods.
- 
-As it was mentioned before, annotations are meta-data, which means that they are not part of _MyClass_ or its prototype. 
 
-###Combine Annotations and single parameter to export your class definition
-Since version 0.2.0 you can define a class or trait without passing the constructor as the first parameter, and you can
-export the result of the mix with one annotation so you don't forget `module.exports = MyClass`:
+As it was mentioned before, annotations are meta-data, which means that they are not part of _MyClass_ or its prototype.
 
-MyClass.js
+## Defining a Class / Module
+Using cocktail to define a class is easy an elegant.
 
-    var cocktail = require('cocktail'),
-        MySuperClass = require('./MySuperClass');
+```js
+var cocktail = require('cocktail');
 
-    cocktail.mix({
-        '@extends': MySuperClass,
-        '@exports': module,
-        '@properties' : {
-            name: 'a default name'
-        }
-    });
+cocktail.mix({
+	'@exports': module,
+	'@as': 'class',
 
-###Even easier Single Parameter Class Definition  
-Version 0.3 introduces a pseudo-annotation `@as` to help Single Parameter Class Definition. Now you can define
-a Class using `@as` passing a value of `class`:
+	'@properties': {
+		name: 'default name'
+	},
 
-MySuperClass.js
+	constructor: function(name){
+		this.setName(name);
+	},
 
-    var cocktail = require('cocktail')
+	sayHello: function() {
+		return 'Hello, my name is ' + this.getName();
+	}
+});
 
-    cocktail.mix({
-        '@exports' : module,
-        '@as'      : 'class',
+```
+In this example our class definition uses `@exports` to tell the mix we want to export the result in the `module.exports` and `@as` tells it is a class.
 
-        '@properties' : {
-            name: 'a default name'
-        }
-    });
+## Traits
+_Traits_ are **Composable Units of Behaviour** (You can read more from [this paper](http://scg.unibe.ch/archive/papers/Scha03aTraits.pdf)).
+Basically, a Trait is a Class, but a special type of Class that has only behaviour (methods) and no state.
+Traits are an alternative to reuse behaviour in a more predictable manner. They are more robust than _Mixins_, or
+_Multiple Inheritance_ since name collisions must be solved by the developer beforehand. If you compose your class
+with one or more Traits and you have a method defined in more than one place, your program will fail giving no magic rule
+or any kind of precedence definition.
+
+> Enumerable.js
+
+```js
+var cocktail = require('cocktail');
+
+cocktail.mix({
+	'@exports': module,
+	'@as': 'class',
+
+	'@requires': ['getItems'],
+
+	first: function() {
+		var items = this.getItems();
+		return items[0] || null;
+	},
+
+	last: function() {
+		var items = this.getItems(),
+			l = items.length;
+		return items[l-1];
+	}
+
+});
+
+
+```
+The class above is a Trait declaration for an Enumerable functionality.
+In this case we only defined `first` and `last` methods to retrieve the
+corresponding elements from an array retrieved by `getItems` methods.
+
+> List.js
+
+```js
+var cocktail = require('cocktail'),
+	Enumerable = require('./Enumerable');
+
+cocktail.mix({
+	'@exports': module,
+	'@as': 'class',
+	'@traits': [Enumerable],
+
+	'@properties': {
+		items: undefined
+	},
+
+	'@static': {
+		/* factory method*/
+		create: function(options) {
+			var List = this;
+			return new List(options);
+		}
+	},
+
+	constructor: function () {
+		this.items = [];
+	}
+});
+
+
+```
+
+The List class uses the Enumerable Trait, the getItems is defined by the `@properties` annotation.
+
+> index.js
+
+```js
+var List = require('./List'),
+	myArr = ['one', 'two', 'three'],
+	myList;
+
+myList = List.create({items: myArr});
+
+console.log(myList.first()); // 'one'
+console.log(myList.last());  // 'three'
+
+
+```
+
+
+## Talents
+_Talents_ are very similar to Traits, in fact a Trait can be applied as a Talent in CocktailJS.
+ The main difference is that a Talent can be applied to an _object_ or _module_.
+So we can define a Talent as a **Dynamically Composable Unit of Reuse**
+(you can read more from [this paper](http://scg.unibe.ch/archive/papers/Ress11a-Talents.pdf)).
+
+Using the _Enumerable_ example, we can use a Trait as a Talent.
+
+> index.js
+
+```js
+var cocktail = require('cocktail'),
+    enumerable = require('./Enumerable'),
+	myArr;
+
+myArr = ['one', 'two', 'three'];
+
+cocktail.mix(myArr, {
+    '@talents': [enumerable],
+
+	/* glue code for enumerable talent*/
+    getItems: function () {
+        return this;
+    }
+});
+
+console.log(myArr.first());  // 'one'
+console.log(myArr.last());   // 'three'
+
+
+```
 
 
 ## Getting Started
@@ -102,7 +215,7 @@ Run grunt to check lint and execute tests
 
 Install instanbul from npm globally if you don't have it already installed
 
-    $ npm install -g istanbul 
+    $ npm install -g istanbul
 
 Run
 
