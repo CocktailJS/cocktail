@@ -1,5 +1,9 @@
 ##CHANGE LOG
 
+- 0.6.0
+    - status: Alpha
+    - New `@merge` annotation parameter: `"properties"` to only apply properties in the mix.
+
 - 0.5.3
     - status: Alpha
     - Fixed issue with `@talents` applied to a Class. See #19
