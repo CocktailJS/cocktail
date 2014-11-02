@@ -183,6 +183,39 @@ console.log(myArr.last());   // 'three'
 
 ```
 
+We can also create a new Talent to define the getItems method for an Array to retrive the current instance.
+
+> ArrayAsItems.js
+
+```js
+var cocktail = require('cocktail');
+
+cocktail.mix({
+    '@exports': module,
+    '@as': 'class',
+
+    getItems: function () {
+        return this;
+    }
+});
+
+```
+And then use it with Enumerable:
+
+
+```js
+var cocktail     = require('cocktail'),
+	enumerable   = require('./Enumerable'),
+	arrayAsItems = require('./ArrayAsItems');
+
+var myArr = ['one', 'two', 'three'];
+
+cocktail.mix(myArr, { '@talents': [enumerable, arrayAsItems] });
+
+console.log(myArr.first());  // 'one'
+console.log(myArr.last());   // 'three'
+
+```
 
 ## Getting Started
 
