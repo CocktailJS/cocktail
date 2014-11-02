@@ -125,8 +125,8 @@ cocktail.mix({
 		}
 	},
 
-	constructor: function () {
-		this.items = [];
+	constructor: function (options) {
+		this.items = options.items || [];
 	}
 });
 
