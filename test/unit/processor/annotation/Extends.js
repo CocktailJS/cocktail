@@ -35,7 +35,7 @@ describe('Annotation Processor @extends', function(){
             var sut = new Extends(),
                 object = {};
 
-            expect(function(){ sut.setParameter(object);}).to.throw(Error, /Object cannot be extended/);
+            expect(function(){ sut.setParameter(object);}).to.throw(Error, /@extends/);
             expect(sut.getParameter()).to.be.an('undefined');
         });
     });
