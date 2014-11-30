@@ -39,7 +39,7 @@ In the example above we created a "Class" named _MyClass_, and we use the `@prop
 As it was mentioned before, annotations are meta-data, which means that they are not part of _MyClass_ or its prototype.
 
 ## Defining a Class / Module
-Using cocktail to define a class is easy an elegant.
+Using cocktail to define a class is easy and elegant.
 
 ```js
 var cocktail = require('cocktail');
