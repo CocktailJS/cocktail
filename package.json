@@ -28,16 +28,15 @@
     "test": "grunt test"
   },
   "devDependencies": {
-    "grunt-simple-mocha": "~0.4",
     "chai": "~1.10",
-    "mocha": "~2.1",
-    "grunt-contrib-jshint": "~0.10",
-    "grunt-contrib-watch": "~0.6",
     "grunt": "~0.4",
-    "sinon-chai": "~2.6",
-    "sinon": "~1.12",
     "grunt-cli": "~0.1.13",
-    "grunt-mocha-test": "~0.12"
+    "grunt-eslint": "^6.0.0",
+    "grunt-mocha-test": "~0.12",
+    "grunt-simple-mocha": "~0.4",
+    "mocha": "~2.1",
+    "sinon": "~1.12",
+    "sinon-chai": "~2.6"
   },
   "keywords": [
     "oop",
