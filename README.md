@@ -1,7 +1,8 @@
 # Cocktail JS
 
-[![Build Status](https://travis-ci.org/CocktailJS/cocktail.png?branch=master)](https://travis-ci.org/CocktailJS/cocktail)
-[![NPM version](https://badge.fury.io/js/cocktail.png)](http://badge.fury.io/js/cocktail)
+[![Build Status](https://travis-ci.org/CocktailJS/cocktail.svg?branch=master)](https://travis-ci.org/CocktailJS/cocktail)
+[![npm version](https://badge.fury.io/js/cocktail.svg)](http://badge.fury.io/js/cocktail)
+[![bitHound Score](https://www.bithound.io/CocktailJS/cocktail/badges/score.svg)](https://www.bithound.io/CocktailJS/cocktail)
 [![Code Climate](https://codeclimate.com/github/CocktailJS/cocktail.png)](https://codeclimate.com/github/CocktailJS/cocktail)
 
 Cocktail is a small but yet powerful library with very simple principles:
