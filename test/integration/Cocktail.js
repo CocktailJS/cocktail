@@ -1,12 +1,12 @@
 'use strict';
 
-var chai = require("chai"),
-    sinon = require("sinon"),
-    sinonChai = require("sinon-chai"),
-    expect = chai.expect,
+var chai = require('chai'),
+    sinon = require('sinon'),
+    sinonChai = require('sinon-chai'),
     cocktail = require('../../lib/cocktail'),
     RestoreProcessors = require('../helper/RestoreProcessors');
 
+var expect = chai.expect;
 chai.use(sinonChai);
 
 cocktail.mix(cocktail, {
@@ -64,7 +64,7 @@ describe('cocktail Integration Test', function(){
             });
 
             cocktail.mix(ClassAA, {
-                '@merge': 'single', 
+                '@merge': 'single',
                 method: aMethod,
                 property: aProperty
             });
@@ -97,7 +97,7 @@ describe('cocktail Integration Test', function(){
     describe('`@properties` annotation adds getter and setter for the specified properties to the given subject ', function(){
         var ClassA,
             anObject,
-            instanceA;         
+            instanceA;
 
         beforeEach(function(){
             ClassA = function(){};
@@ -216,11 +216,11 @@ describe('cocktail Integration Test', function(){
         var Base = function(){},
             aMethod = sinon.spy(),
             ClassA,
-            instanceA;         
+            instanceA;
 
         Base.prototype.aMethod = aMethod;
         Base.prototype.aProperty = 1;
-        
+
         beforeEach(function(){
             ClassA = function(){};
             instanceA = undefined;
@@ -260,12 +260,12 @@ describe('cocktail Integration Test', function(){
 
         it('throws an error if it is not called with a Class to extend from', function(){
             var anObject = {};
-            
+
             expect(function(){
                 cocktail.mix(ClassA, {
                     '@extends': anObject
                 });
-            }).to.throw(Error);            
+            }).to.throw(Error);
 
         });
 
@@ -274,14 +274,14 @@ describe('cocktail Integration Test', function(){
                 '@extends': Base,
 
                 aMethod: function(param){
-                    this.callSuper('aMethod', param);                    
+                    this.callSuper('aMethod', param);
                 }
 
             });
 
             expect(ClassA).to.respondTo('aMethod');
             expect(ClassA.prototype.aMethod).to.not.be.equal(aMethod);
-            
+
             instanceA = new ClassA();
 
             instanceA.aMethod(1);
@@ -294,7 +294,7 @@ describe('cocktail Integration Test', function(){
                 param = 1;
 
             Base.prototype.constructor = sinon.spy();
-            
+
             ClassB = cocktail.mix({
                 '@extends': Base,
 
@@ -348,7 +348,7 @@ describe('cocktail Integration Test', function(){
 
 
             expect(Custom.prototype).to.have.property('name');
-            expect(Custom.prototype.name).to.be.equal('@'+annotationName);
+            expect(Custom.prototype.name).to.be.equal('@' + annotationName);
 
             cocktail.use(Custom);
 
@@ -396,7 +396,7 @@ describe('cocktail Integration Test', function(){
 
                     cocktail.mix(proto, {
                         '@merge': 'mine',
-                        a: 2,
+                        a: 2
                     });
                 }
             });
@@ -423,7 +423,7 @@ describe('cocktail Integration Test', function(){
 
             cocktail.mix(Custom, {
                 '@exports': module,
-                
+
                 some: 'a',
 
                 aMethod: function(){}
@@ -432,7 +432,7 @@ describe('cocktail Integration Test', function(){
             expect(module.exports).to.not.be.an('undefined');
             expect(module.exports).to.respondTo('aMethod');
         });
-    
+
         it('exports the current class definition in the specified value', function() {
             var module = {
                 exports: undefined
@@ -440,7 +440,7 @@ describe('cocktail Integration Test', function(){
 
             cocktail.mix({
                 '@exports': module,
-                
+
                 constructor: function() {/*Body*/},
 
                 some: 'a',
@@ -452,7 +452,7 @@ describe('cocktail Integration Test', function(){
             expect(module.exports).to.respondTo('aMethod');
         });
 
-    }); 
+    });
 
     describe('`@static` annotations defines methods and properties in the class', function(){
         it('adds static method to ClassA', function(){
@@ -468,7 +468,7 @@ describe('cocktail Integration Test', function(){
 
             expect(ClassA).to.be.a('function');
             expect(ClassA.method).to.be.a('function');
-            
+
             instance = new ClassA();
 
             expect(instance).to.not.respondTo('method');
@@ -490,11 +490,11 @@ describe('cocktail Integration Test', function(){
             expect(ClassA.property).to.be.a('string');
 
             expect(ClassA.property).to.be.eql(property);
-            
+
             instance = new ClassA();
             expect(instance.property).to.be.an('undefined');
 
-        });        
+        });
     });
 
     describe('Single Argument Parameter Class Definition', function(){
@@ -564,7 +564,7 @@ describe('cocktail Integration Test', function(){
             expect(sut).to.respondTo('method');
 
         });
-        
+
         it('did not return a class if one single argument is specified with a @as annotation with a value different of "class".', function(){
             var sut;
 
@@ -597,7 +597,7 @@ describe('cocktail Integration Test', function(){
 
             Class = cocktail.mix({
                 '@as': 'class',
-                '@extends': Parent                
+                '@extends': Parent
             });
 
             sut = new Class(value);

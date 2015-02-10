@@ -31,8 +31,8 @@ cocktail.mix({
             defaultProcessors = this.getDefaultProcessors(),
             processors = {};
 
-        for(key in defaultProcessors){
-            if(defaultProcessors.hasOwnProperty(key)) {
+        for (key in defaultProcessors) {
+            if (defaultProcessors.hasOwnProperty(key)) {
                 processors[key] = defaultProcessors[key];
             }
         }
@@ -47,10 +47,10 @@ cocktail.mix({
     clearProcessors: function() {
         var processors = this.getProcessors(),
             key;
-        for(key in processors){
-            if(processors.hasOwnProperty(key) && key !== 'no-op'){
+        for (key in processors) {
+            if (processors.hasOwnProperty(key) && key !== 'no-op') {
                 delete processors[key];
-            }        
+            }
         }
     }
 });

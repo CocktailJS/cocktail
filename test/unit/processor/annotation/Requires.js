@@ -59,7 +59,9 @@ describe('Annotation Processor @requires', function(){
             it('does not create the method if it has been already defined', function(){
                 var sut = new Requires(),
                     MyTrait = function(){},
-                    requiredMethod = function(){ return 'required'; };
+                    requiredMethod = function(){
+                        return 'required';
+                    };
 
                 MyTrait.prototype.requiredMethod = requiredMethod;
 
@@ -76,5 +78,5 @@ describe('Annotation Processor @requires', function(){
 
 
         });
-    }); 
+    });
 });

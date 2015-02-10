@@ -19,7 +19,7 @@ describe('Annotation Processor @merge', function(){
 
         it('accepts {String} as parameter', function(){
             var sut = new Merge(),
-                strategy = "single";
+                strategy = 'single';
 
             sut.setParameter(strategy);
 
@@ -30,7 +30,7 @@ describe('Annotation Processor @merge', function(){
     describe('Merge process', function(){
 
         describe('`single` merge strategy', function(){
-            var strategy = "single";
+            var strategy = 'single';
 
             it('adds properties and/or methods defined in proto into subject object', function(){
                 var subject = {},
@@ -91,7 +91,7 @@ describe('Annotation Processor @merge', function(){
                     };
 
                 Subject.prototype.property = 0;
-                Subject.prototype.override = function(){};    
+                Subject.prototype.override = function(){};
 
                 sut.setParameter(strategy);
                 sut.process(Subject, proto);
@@ -107,7 +107,7 @@ describe('Annotation Processor @merge', function(){
 
 
         describe('`their` merge strategy', function(){
-            var strategy = "their";
+            var strategy = 'their';
 
             it('adds properties and/or methods defined in proto into subject object', function(){
                 var subject = {},
@@ -168,7 +168,7 @@ describe('Annotation Processor @merge', function(){
                     };
 
                 Subject.prototype.property = 0;
-                Subject.prototype.override = aMethod;    
+                Subject.prototype.override = aMethod;
 
                 sut.setParameter(strategy);
                 sut.process(Subject, proto);
@@ -183,7 +183,7 @@ describe('Annotation Processor @merge', function(){
 
 
         describe('`deep-mine` merge strategy', function(){
-            var strategy = "deep-mine";
+            var strategy = 'deep-mine';
 
             it('adds properties and/or methods defined in proto into subject object', function(){
                 var subject = {},
@@ -235,20 +235,20 @@ describe('Annotation Processor @merge', function(){
 
             it('overrides properties defined in subject object if they have the same name, if the target property is an array it concatenates the content', function(){
                 var subject = {
-                        arr: [1,2,3]
+                        arr: [1, 2, 3]
                     },
                     proto = {
-                        arr: [4,5,6]
+                        arr: [4, 5, 6]
                     };
 
                 sut.setParameter(strategy);
                 sut.process(subject, proto);
-                expect(subject.arr).to.eql([1,2,3,4,5,6]);
+                expect(subject.arr).to.eql([1, 2, 3, 4, 5, 6]);
             });
         });
 
         describe('`deep-their` merge strategy', function(){
-            var strategy = "deep-their";
+            var strategy = 'deep-their';
 
             it('adds properties and/or methods defined in proto into subject object', function(){
                 var subject = {},
@@ -282,7 +282,6 @@ describe('Annotation Processor @merge', function(){
                 var subject = {
                         property: {
                             sub1 : 0
-                            
                         }
                     },
                     proto = {
@@ -301,20 +300,20 @@ describe('Annotation Processor @merge', function(){
 
             it('overrides properties defined in subject object if they have the same name, if the target property is an array it concatenates the content', function(){
                 var subject = {
-                        arr: [1,2,3]
+                        arr: [1, 2, 3]
                     },
                     proto = {
-                        arr: [4,5,6]
+                        arr: [4, 5, 6]
                     };
 
                 sut.setParameter(strategy);
                 sut.process(subject, proto);
-                expect(subject.arr).to.eql([1,2,3,4,5,6]);
+                expect(subject.arr).to.eql([1, 2, 3, 4, 5, 6]);
             });
         });
 
         describe('`properties` merge strategy', function(){
-            var strategy = "properties";
+            var strategy = 'properties';
 
             it('adds only properties defined in proto into subject object', function(){
                 var subject = {},
@@ -348,7 +347,6 @@ describe('Annotation Processor @merge', function(){
             //     var subject = {
             //             property: {
             //                 sub1 : 0
-                            
             //             }
             //         },
             //         proto = {
@@ -380,4 +378,4 @@ describe('Annotation Processor @merge', function(){
         });
 
     });
-});  
+});

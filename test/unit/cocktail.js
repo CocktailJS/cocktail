@@ -1,11 +1,12 @@
 'use strict';
 
-var chai = require("chai"),
-    sinon = require("sinon"),
-    sinonChai = require("sinon-chai"),
-    expect = chai.expect,
+var chai = require('chai'),
+    sinon = require('sinon'),
+    sinonChai = require('sinon-chai'),
     cocktail = require('../../lib/cocktail'),
     RestoreProcessors = require('../helper/RestoreProcessors');
+
+var expect = chai.expect;
 
 chai.use(sinonChai);
 
@@ -19,7 +20,7 @@ describe('cocktail', function(){
         mergeSetParameterSpy = sinon.spy(),
         MergeSpy;
 
-    Merge.prototype.name = 'spyMerge';    
+    Merge.prototype.name = 'spyMerge';
     Merge.prototype.priority = 99;
     Merge.prototype.process = mergeProcessSpy;
     Merge.prototype.setParameter = mergeSetParameterSpy;
@@ -39,7 +40,7 @@ describe('cocktail', function(){
 
 
     describe('Registering processors', function(){
-        var Processor = function(){};    
+        var Processor = function(){};
 
         it('Adds new processor/s to registered processors list', function(){
             cocktail.registerProcessors({
@@ -60,7 +61,7 @@ describe('cocktail', function(){
                 expect(cocktail.mix()).to.be.an('undefined');
             });
         });
-        
+
         describe('mix({Class} MyClass)', function(){
             it('returns the same MyClass if no other arguments are specified.', function(){
                 expect(cocktail.mix(MyClass)).to.be.equal(MyClass);
@@ -86,11 +87,11 @@ describe('cocktail', function(){
             });
 
             it('returns a class if one single argument is specified with an @extends annotation.', function(){
-                var MyClass = function(){},
+                var MyBaseClass = function(){},
                     sut;
 
                 sut = cocktail.mix({
-                    '@extends': MyClass
+                    '@extends': MyBaseClass
                 });
 
                 expect(sut).to.be.a('function');
@@ -129,7 +130,7 @@ describe('cocktail', function(){
         describe('mix({Class} MyClass, {Object} prototype)', function(){
             var MyClass = function(){},
                 aMethod = function method(){};
- 
+
 
             it('calls merge processor with MyClass and proto', function(){
                 var proto = {
@@ -139,7 +140,7 @@ describe('cocktail', function(){
 
                 expect(cocktail.mix(MyClass, proto)).to.be.a('function');
 
-                expect(mergeSetParameterSpy).to.be.calledWith("single");
+                expect(mergeSetParameterSpy).to.be.calledWith('single');
                 expect(mergeProcessSpy).to.be.calledWith(MyClass, proto);
 
             });
@@ -158,7 +159,7 @@ describe('cocktail', function(){
 
                 expect(cocktail.mix(anObject, proto)).to.be.an('object');
 
-                expect(mergeSetParameterSpy).to.be.calledWith("single");
+                expect(mergeSetParameterSpy).to.be.calledWith('single');
                 expect(mergeProcessSpy).to.be.calledWith(anObject, proto);
             });
 
@@ -167,7 +168,7 @@ describe('cocktail', function(){
         describe('mix({Class} MyClass, {Object} prototype {\'@merge\': \'strategy\'})', function(){
             var MyClass = function(){},
                 strategy = 'strategy';
- 
+
             it('calls merge processor with MyClass and proto and uses the merge strategy defined by `@merge`', function(){
                 expect(
                     cocktail.mix(MyClass, {

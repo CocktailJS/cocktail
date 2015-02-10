@@ -1,10 +1,11 @@
 'use strict';
 
-var chai = require("chai"),
-	expect = chai.expect,
+var chai = require('chai'),
 	cocktail = require('../../../../lib/cocktail'),
 	// Requires = require('../../../../lib/processor/annotation/Requires.js'),
 	Talents = require('../../../../lib/processor/annotation/Talents.js');
+
+var expect = chai.expect;
 
 describe('Annotation Processor @talents', function(){
 	var sut = new Talents();

@@ -21,7 +21,7 @@ describe('NoOp Processor', function(){
 
     it('a NoOP processor instance setParameter does nothing', function(){
         sut.setParameter('Whatever');
-        
+
         expect(sut.getParameter()).to.equal(undefined);
     });
-});  
+});

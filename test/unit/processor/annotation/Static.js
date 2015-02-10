@@ -29,14 +29,18 @@ describe('Annotation Processor @static', function(){
         it('throws an error if parameter is set to an Array', function(){
             var sut = new Static();
 
-            expect(function(){ sut.setParameter(['some']);}).to.throw(Error, /@static parameter should be an Object/);
+            expect(function(){
+                sut.setParameter(['some']);
+            }).to.throw(Error, /@static parameter should be an Object/);
             expect(sut.getParameter()).to.be.an('undefined');
         });
 
         it('throws an error if parameter is set to a String', function(){
             var sut = new Static();
 
-            expect(function(){ sut.setParameter('some');}).to.throw(Error, /@static parameter should be an Object/);
+            expect(function(){
+                sut.setParameter('some');
+            }).to.throw(Error, /@static parameter should be an Object/);
             expect(sut.getParameter()).to.be.an('undefined');
         });
 
@@ -77,6 +81,4 @@ describe('Annotation Processor @static', function(){
         });
 
     });
-
-
 });

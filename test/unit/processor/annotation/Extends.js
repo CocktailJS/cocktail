@@ -1,11 +1,12 @@
 'use strict';
 
-var chai = require("chai"),
-    sinon = require("sinon"),
-    sinonChai = require("sinon-chai"),
-    expect = chai.expect,
+var chai = require('chai'),
+    sinon = require('sinon'),
+    sinonChai = require('sinon-chai'),
     cocktail = require('../../../../lib/cocktail'),
     Extends = require('../../../../lib/processor/annotation/Extends.js');
+
+var expect = chai.expect;
 
 chai.use(sinonChai);
 
@@ -35,7 +36,9 @@ describe('Annotation Processor @extends', function(){
             var sut = new Extends(),
                 object = {};
 
-            expect(function(){ sut.setParameter(object);}).to.throw(Error, /@extends/);
+            expect(function(){
+                sut.setParameter(object);
+            }).to.throw(Error, /@extends/);
             expect(sut.getParameter()).to.be.an('undefined');
         });
     });
@@ -59,7 +62,7 @@ describe('Annotation Processor @extends', function(){
             it('An instance of MyClass must be an instance of BaseClass too.', function(){
                 var instance = new MyClass();
 
-                expect(instance).to.be.instanceOf(MyClass); 
+                expect(instance).to.be.instanceOf(MyClass);
                 expect(instance).to.be.instanceOf(BaseClass);
             });
         });
@@ -68,8 +71,11 @@ describe('Annotation Processor @extends', function(){
             var sut = new Extends(),
                 BaseClass = function(){},
                 MyClass = function(){},
-                foo = sinon.spy(function(val){return val;}),
-                myInstance;
+                foo, myInstance;
+
+            foo = sinon.spy(function(val){
+                return val;
+            });
 
             BaseClass.prototype.foo = foo;
 
@@ -112,10 +118,12 @@ describe('Annotation Processor @extends', function(){
             });
 
             it('should throw exception if parent class has no method', function(){
-                expect(function(){myInstance.noSuper();}).to.throw(Error);
+                expect(function(){
+                    myInstance.noSuper();
+                }).to.throw(Error);
             });
 
         });
     });
 
-});  
+});

@@ -5,7 +5,7 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     eslint: {
-      target: ['lib/**/*.js']
+      target: ['lib/**/*.js', 'test/**/*.js']
     },
 
     simplemocha: {

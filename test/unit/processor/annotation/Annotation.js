@@ -1,11 +1,11 @@
 'use strict';
 
-var chai = require("chai"),
-    sinonChai = require("sinon-chai"),
-    expect = chai.expect,
+var chai = require('chai'),
+    sinonChai = require('sinon-chai'),
     cocktail = require('../../../../lib/cocktail'),
     Annotation = require('../../../../lib/processor/annotation/Annotation.js');
 
+var expect = chai.expect;
 chai.use(sinonChai);
 
 describe('Annotation Processor @annotation', function(){
@@ -24,7 +24,7 @@ describe('Annotation Processor @annotation', function(){
     describe('Parameter for @annotation annotation', function(){
 
         it('accepts {String} as parameter', function(){
-            var name = "single";
+            var name = 'single';
 
             sut.setParameter(name);
 
@@ -48,4 +48,4 @@ describe('Annotation Processor @annotation', function(){
         });
 
     });
-});  
+});

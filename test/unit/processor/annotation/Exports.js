@@ -1,10 +1,10 @@
 'use strict';
 
-var chai = require("chai"),
-    expect = chai.expect,
+var chai = require('chai'),
     cocktail = require('../../../../lib/cocktail'),
     Exports = require('../../../../lib/processor/annotation/Exports.js');
 
+var expect = chai.expect;
 
 describe('Annotation Processor @exports', function(){
     var sut = new Exports();
