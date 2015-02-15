@@ -2,6 +2,6 @@
 test*/
 .DS_Store
 .jshintrc
+.eslintrc
 .travis.yml
-Gruntfile.js
 coverage
