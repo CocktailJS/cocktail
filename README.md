@@ -233,16 +233,33 @@ The latest documentation is published at [CocktailJS Documentation](http://cockt
 A Cocktail playground can be found in [cocktail recipes](https://github.com/CocktailJS/cocktail-recipes) repo.
 
 ## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
-### Running Tests
+In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. 
+
+### Running Lint & Tests
 Add your unit and/or integration tests and execute
 
-    $ grunt test
+    $ npm test
+
+
+### Run unit tests
+
+    $npm run unit
+
+
+### Run integration tests
+
+    $npm run integration 
+
+
+### Lint your code
+
+    $ npm run lint
+
 
 ### Before Commiting
-Run grunt to check lint and execute tests
+Run `npm test` to check lint and execute tests
 
-    $ grunt
+    $ npm test
 
 
 ### Check test code coverage with instanbul
@@ -260,5 +277,5 @@ Run
 see [CHANGELOG](https://github.com/CocktailJS/cocktail/blob/master/CHANGELOG.md)
 
 ## License
-Copyright (c) 2013 - 2014 Maximiliano Fierro  
+Copyright (c) 2013 - 2015 Maximiliano Fierro  
 Licensed under the MIT license.
