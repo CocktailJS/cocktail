@@ -266,13 +266,8 @@ Run `npm test` to check lint and execute tests
 
 ### Check test code coverage with instanbul
 
-Install instanbul from npm globally if you don't have it already installed
+    $ npm run coverage
 
-    $ npm install -g istanbul
-
-Run
-
-    $ istanbul cover _mocha -- -u exports --recursive test
 
 ## Release History
 
