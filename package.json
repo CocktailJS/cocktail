@@ -31,11 +31,11 @@
     "lint": "eslint --quiet lib/ test/"
   },
   "devDependencies": {
-    "chai": "~1.10",
+    "chai": "~2.0",
     "eslint": "^0.14.1",
     "mocha": "~2.1",
     "sinon": "~1.12",
-    "sinon-chai": "~2.6"
+    "sinon-chai": "~2.7"
   },
   "keywords": [
     "oop",

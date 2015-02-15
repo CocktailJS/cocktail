@@ -63,7 +63,7 @@ describe('Annotation Processor @exports', function(){
 
                 sut.process(BaseClass);
 
-                expect(module).to.not.have.property('exports');
+                expect(module).to.be.equal(false);
 
             });
 
@@ -74,7 +74,7 @@ describe('Annotation Processor @exports', function(){
 
                 sut.process(BaseClass);
 
-                expect(module).to.not.have.property('exports');
+                expect(module).to.be.equal(true);
 
             });
 
