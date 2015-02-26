@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (c) 2013 - 2014 Maximiliano Fierro
+ * Copyright (c) 2013 - 2015 Maximiliano Fierro
  * Licensed under the MIT license.
  */
  'use strict';
