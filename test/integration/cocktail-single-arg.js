@@ -10,7 +10,7 @@ cocktail.mix(cocktail, {
     '@talents': [RestoreProcessors]
 });
 
-describe('cocktail Integration Test: merge', function(){
+describe('cocktail Integration Test: single argument class definition', function(){
 
     beforeEach(function(){
         cocktail.restoreDefaultProcessors();
