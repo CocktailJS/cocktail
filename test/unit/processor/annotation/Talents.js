@@ -32,7 +32,7 @@ describe('Annotation Processor @talents', function(){
 
 	describe('Talents process', function(){
 
-		describe('Passing a Talent reference `@talents:[TalentA]`', function(){
+		describe('Passing a Talent class reference `@talents:[TalentA]`', function(){
 			var sut = new Talents(),
 				TalentA = function(){},
 				myObj = {},
@@ -51,14 +51,52 @@ describe('Annotation Processor @talents', function(){
 			});
 		});
 
+		describe('Passing a Talent object reference `@talents:[TalentA]`', function(){
+			var sut = new Talents(),
+				TalentA = {},
+				myObj = {},
+				aMethod = function method(){};
 
-		describe('Passing a Talent using options object `@talents: [{talent: TalentA}]`', function(){
+			TalentA.aMethod = aMethod;
+			myObj.foo = 1;
+
+			sut.setParameter([TalentA]);
+
+			sut.process(myObj);
+
+			it('makes the TalentA methods part of the given myObj', function(){
+				expect(myObj).to.respondTo('aMethod');
+				expect(myObj.aMethod).to.be.equal(aMethod);
+			});
+		});
+
+		describe('Passing a Talent class using options object `@talents: [{talent: TalentA}]`', function(){
 			var sut = new Talents(),
 				TalentA = function(){},
 				myObj = {},
 				aMethod = function method(){};
 
 			TalentA.prototype.aMethod = aMethod;
+			myObj.foo = 1;
+
+			sut.setParameter([{talent: TalentA}]);
+
+			sut.process(myObj);
+
+			it('makes the TalentA methods part of the given myObj', function(){
+				expect(myObj).to.respondTo('aMethod');
+				expect(myObj.aMethod).to.be.equal(aMethod);
+			});
+		});
+
+
+		describe('Passing a Talent object using options object `@talents: [{talent: TalentA}]`', function(){
+			var sut = new Talents(),
+				TalentA = {},
+				myObj = {},
+				aMethod = function method(){};
+
+			TalentA.aMethod = aMethod;
 			myObj.foo = 1;
 
 			sut.setParameter([{talent: TalentA}]);

@@ -51,7 +51,7 @@ describe('Annotation Processor @traits', function(){
             });
         });
 
-        describe('Passing a Trait objet reference `@traits:[TraitA]`', function(){
+        describe('Passing a Trait object reference `@traits:[TraitA]`', function(){
             var sut = new Traits(),
                 TraitA = {},
                 MyClass = function(){},
@@ -70,13 +70,32 @@ describe('Annotation Processor @traits', function(){
             });
         });
 
-        describe('Passing a Trait using options object `@traits: [{trait: TraitA}]`', function(){
+        describe('Passing a Trait class using options object `@traits: [{trait: TraitA}]`', function(){
             var sut = new Traits(),
                 TraitA = function(){},
                 MyClass = function(){},
                 aMethod = function method(){};
 
             TraitA.prototype.aMethod = aMethod;
+            MyClass.prototype.foo = 1;
+
+            sut.setParameter([{trait: TraitA}]);
+
+            sut.process(MyClass);
+
+            it('makes the TraitA methods part of the given MyClass', function(){
+                expect(MyClass).to.respondTo('aMethod');
+                expect(MyClass.prototype.aMethod).to.be.equal(aMethod);
+            });
+        });
+
+        describe('Passing a Trait object using options object `@traits: [{trait: TraitA}]`', function(){
+            var sut = new Traits(),
+                TraitA = {},
+                MyClass = function(){},
+                aMethod = function method(){};
+
+            TraitA.aMethod = aMethod;
             MyClass.prototype.foo = 1;
 
             sut.setParameter([{trait: TraitA}]);
@@ -133,7 +152,6 @@ describe('Annotation Processor @traits', function(){
             });
 
         });
-
 
         describe('Traits are applied not matter the order they are created', function(){
             var sut = new Traits(),

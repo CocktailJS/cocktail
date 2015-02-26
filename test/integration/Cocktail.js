@@ -13,7 +13,6 @@ cocktail.mix(cocktail, {
     '@talents': [RestoreProcessors]
 });
 
-
 describe('cocktail Integration Test', function(){
 
     beforeEach(function(){
