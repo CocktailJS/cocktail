@@ -32,13 +32,32 @@ describe('Annotation Processor @traits', function(){
 
     describe('Traits process', function(){
 
-        describe('Passing a Trait reference `@traits:[TraitA]`', function(){
+        describe('Passing a Trait class reference `@traits:[TraitA]`', function(){
             var sut = new Traits(),
                 TraitA = function(){},
                 MyClass = function(){},
                 aMethod = function method(){};
 
             TraitA.prototype.aMethod = aMethod;
+            MyClass.prototype.foo = 1;
+
+            sut.setParameter([TraitA]);
+
+            sut.process(MyClass);
+
+            it('makes the TraitA methods part of the given MyClass', function(){
+                expect(MyClass).to.respondTo('aMethod');
+                expect(MyClass.prototype.aMethod).to.be.equal(aMethod);
+            });
+        });
+
+        describe('Passing a Trait objet reference `@traits:[TraitA]`', function(){
+            var sut = new Traits(),
+                TraitA = {},
+                MyClass = function(){},
+                aMethod = function method(){};
+
+            TraitA.aMethod = aMethod;
             MyClass.prototype.foo = 1;
 
             sut.setParameter([TraitA]);
