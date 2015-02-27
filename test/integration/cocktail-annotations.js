@@ -44,7 +44,6 @@ describe('cocktail Integration Test: annotations', function(){
                 process: aProcess
             });
 
-
             expect(Custom.prototype).to.have.property('name');
             expect(Custom.prototype.name).to.be.equal('@' + annotationName);
 
@@ -59,6 +58,31 @@ describe('cocktail Integration Test: annotations', function(){
 
         });
 
+        it('if annotation has retain=true the annotation property is retained', function(){
+            var annotationName = 'custom-with-retain',
+                customValue = 1;
+
+            cocktail.mix(Custom, {
+                '@annotation': annotationName,
+                retain: true,
+                setParameter: aSetter,
+                process: aProcess
+            });
+
+            expect(Custom.prototype).to.have.property('name');
+            expect(Custom.prototype.name).to.be.equal('@' + annotationName);
+
+            cocktail.use(Custom);
+
+            cocktail.mix(Subject, {
+                '@custom-with-retain': customValue
+            });
+
+            expect(aSetter).to.have.been.calledWith(customValue);
+            expect(aProcess).to.have.been.calledWith(Subject);
+            expect(Subject.prototype).to.have.property('@' + annotationName);
+        });
+
         it('if annotation already exists it gets overriden by the current definition as a custom annotation', function(){
             var customValue = 1;
 
@@ -68,7 +92,6 @@ describe('cocktail Integration Test: annotations', function(){
                 setParameter: aSetter,
                 process: aProcess
             });
-
 
             cocktail.use(Custom);
 
@@ -83,7 +106,6 @@ describe('cocktail Integration Test: annotations', function(){
 
         it('if the annotation process invokes mix() the processor queue should be independent.', function(){
             var customValue = 1;
-
 
             cocktail.mix(Custom, {
                 '@annotation': 'custom',
@@ -100,7 +122,6 @@ describe('cocktail Integration Test: annotations', function(){
             });
 
             cocktail.use(Custom);
-
 
             cocktail.mix(Subject, {
                 '@custom': customValue
