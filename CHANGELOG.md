@@ -1,5 +1,13 @@
 ##CHANGE LOG
 
+- 0.7.0
+    - status: Beta
+    - `@traits` and `@talents` annotations accept Object definitions. See issue #23.
+    - Improved code for merge, Trait and Talent processors.
+    - Removed grunt dependencies. Using npm scripts.
+    - Implemented ESLint for code style.
+    - Added coverage check using istanbul.
+
 - 0.6.0
     - status: Beta
     - New `@merge` annotation parameter: `"properties"` to only apply properties in the mix.
