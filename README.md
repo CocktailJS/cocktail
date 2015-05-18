@@ -15,7 +15,7 @@ Cocktail is a small but yet powerful library with very simple principles:
 ## Reuse code
 Cocktail explores three mechanisms to share/reuse/mix code:
 
-- **Extends**: Classical OOP inheritance implemented in Javascript.
+- **Extends**: OOP inheritance implemented in Javascript.
 - **Traits**: Traits are composable behavior units that can be added to a Class.
 - **Talents**: Same idea as Traits but applied to instances of a Class.
 
