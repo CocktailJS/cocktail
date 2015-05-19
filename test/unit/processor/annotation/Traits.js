@@ -70,6 +70,35 @@ describe('Annotation Processor @traits', function(){
             });
         });
 
+        describe('Passing a ES6-type class as Trait reference `@traits:[TraitA]`', function(){
+            var sut = new Traits(),
+                TraitA = function(){},
+                MyClass = function(){},
+                aMethod = function method(){},
+                propDesc = {
+                    enumerable: false,
+                    value: aMethod
+                };
+
+            Object.defineProperty(
+                TraitA.prototype,
+                'aMethod',
+                propDesc
+            );
+            sut.setParameter([TraitA]);
+
+            sut.process(MyClass);
+
+            it('makes the TraitA methods part of the given MyClass', function(){
+                expect(MyClass).to.respondTo('aMethod');
+                expect(MyClass.prototype.aMethod).to.be.equal(aMethod);
+            });
+
+            it('makes MyClass method to keep same property descriptor', function(){
+                expect(Object.getOwnPropertyDescriptor(MyClass.prototype, 'aMethod') === propDesc);
+            });
+        });
+
         describe('Passing a Trait class using options object `@traits: [{trait: TraitA}]`', function(){
             var sut = new Traits(),
                 TraitA = function(){},
