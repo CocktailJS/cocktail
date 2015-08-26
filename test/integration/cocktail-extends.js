@@ -101,13 +101,16 @@ describe('cocktail Integration Test: extends', function(){
         });
 
         it('`callSuper` method in the constructor calls parent constructor', function(){
-            var ClassB,
+            var ClassA, ClassB,
+                constructorBase = sinon.spy(),
                 param = 1;
 
-            Base.prototype.constructor = sinon.spy();
+            ClassA = function (param) {
+                constructorBase(param);
+            };
 
             ClassB = cocktail.mix({
-                '@extends': Base,
+                '@extends': ClassA,
 
                 constructor: function(param){
                     this.callSuper('constructor', param);
@@ -116,7 +119,97 @@ describe('cocktail Integration Test: extends', function(){
 
             instanceA = new ClassB(param);
 
-            expect(Base.prototype.constructor).to.have.been.calledWith(param);
+            expect(constructorBase).to.have.been.calledWith(param);
+        });
+
+
+        it('`callSuper` method with multiple inheritance level should call parent methods in order', function () {
+            var ClassA, ClassB, ClassC,
+                fooA, fooB, fooC,
+                instance;
+
+            fooA = sinon.spy();
+            fooB = sinon.spy();
+            fooC = sinon.spy();
+
+            ClassA = cocktail.mix({
+                
+                constructor: function() {                    
+                },
+
+                foo: function() { 
+                    fooA();
+                }
+            });
+
+            ClassB = cocktail.mix({
+                '@extends': ClassA,
+                
+                foo: function() { 
+                    this.callSuper('foo');
+                    fooB();
+                }
+            });
+
+            ClassC = cocktail.mix({
+                '@extends': ClassB,
+
+                foo: function() { 
+                    this.callSuper('foo');
+                    fooC();
+                }
+            });
+
+            instance = new ClassC();
+
+            instance.foo();
+
+            expect(fooA).to.have.been.called;
+            expect(fooB).to.have.been.called;
+            expect(fooC).to.have.been.called;
+
+        });
+
+
+        it('`callSuper` method with multiple inheritance level should call parent constructors in order', function () {
+            var ClassA, ClassB, ClassC,
+                constructorA, constructorB, constructorC;
+
+            constructorA = sinon.spy();
+            constructorB = sinon.spy();
+            constructorC = sinon.spy();
+
+            ClassA = cocktail.mix({
+                
+                constructor: function() {
+                    constructorA();
+                }
+            });
+
+            ClassB = cocktail.mix({
+                '@extends': ClassA,
+                
+                constructor: function() {
+                    this.callSuper('constructor');
+                    constructorB();
+                }
+            });
+
+            ClassC = cocktail.mix({
+                '@extends': ClassB,
+
+                constructor: function() {
+                    this.callSuper('constructor');
+                    constructorC();
+                }
+            });
+
+            new ClassC();
+
+            expect(constructorA).to.have.been.called;
+            expect(constructorB).to.have.been.called;
+            expect(constructorC).to.have.been.called;
+
         });
 
         it('makes methods and properties from base available on the given subject when subject is a class definition', function(){
