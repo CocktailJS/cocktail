@@ -33,10 +33,10 @@
   },
   "devDependencies": {
     "chai": "~3.2",
-    "eslint": "^1.1.0",
-    "istanbul": "^0.3.6",
+    "eslint": "^1.2.1",
+    "istanbul": "^0.3.18",
     "mocha": "~2.2.5",
-    "sinon": "~1.15.4",
+    "sinon": "~1.16.1",
     "sinon-chai": "~2.8"
   },
   "keywords": [
