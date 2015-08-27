@@ -118,7 +118,7 @@ describe('cocktail Integration Test: extends', function(){
             });
 
             instanceA = new ClassB(param);
-
+            expect(constructorBase).to.have.been.calledOnce;
             expect(constructorBase).to.have.been.calledWith(param);
         });
 
@@ -126,11 +126,19 @@ describe('cocktail Integration Test: extends', function(){
         it('`callSuper` method with multiple inheritance level should call parent methods in order', function () {
             var ClassA, ClassB, ClassC,
                 fooA, fooB, fooC,
+                bazA, bazB, 
+                barB, barInstance,
                 instance;
 
             fooA = sinon.spy();
             fooB = sinon.spy();
             fooC = sinon.spy();
+
+            bazA = sinon.spy();
+            bazB = sinon.spy();
+            
+            barInstance = sinon.spy();
+            barB = sinon.spy();
 
             ClassA = cocktail.mix({
                 
@@ -139,6 +147,10 @@ describe('cocktail Integration Test: extends', function(){
 
                 foo: function() { 
                     fooA();
+                },
+
+                baz: function() {
+                    bazA();
                 }
             });
 
@@ -148,6 +160,15 @@ describe('cocktail Integration Test: extends', function(){
                 foo: function() { 
                     this.callSuper('foo');
                     fooB();
+                },
+
+                baz: function () {
+                    this.callSuper('baz');
+                    bazB();
+                },
+
+                bar: function () {
+                    barB();
                 }
             });
 
@@ -164,9 +185,26 @@ describe('cocktail Integration Test: extends', function(){
 
             instance.foo();
 
-            expect(fooA).to.have.been.called;
-            expect(fooB).to.have.been.called;
-            expect(fooC).to.have.been.called;
+            expect(fooA).to.have.been.calledOnce;
+            expect(fooB).to.have.been.calledOnce;
+            expect(fooC).to.have.been.calledOnce;
+
+            instance.baz();
+
+            expect(bazA).to.have.been.calledOnce;
+            expect(bazB).to.have.been.calledOnce;
+
+            instance.bar = function() {
+                this.callSuper('bar');
+                barInstance();
+            }
+
+
+            instance.bar();
+
+            expect(barB).to.have.been.calledOnce;
+            expect(barInstance).to.have.been.calledOnce;
+
 
         });
 
@@ -206,9 +244,9 @@ describe('cocktail Integration Test: extends', function(){
 
             new ClassC();
 
-            expect(constructorA).to.have.been.called;
-            expect(constructorB).to.have.been.called;
-            expect(constructorC).to.have.been.called;
+            expect(constructorA).to.have.been.calledOnce;
+            expect(constructorB).to.have.been.calledOnce;
+            expect(constructorC).to.have.been.calledOnce;
 
         });
 
