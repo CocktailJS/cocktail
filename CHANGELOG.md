@@ -1,4 +1,10 @@
-##CHANGE LOG
+## CHANGE LOG
+
+- 0.7.2
+    - Fixed issue #26: Recursive loop when nesting `callSuper`. 
+
+- 0.7.1
+    - `@traits` & `@talents` support for ES6 Classes defintion. 
 
 - 0.7.0
     - status: Beta
