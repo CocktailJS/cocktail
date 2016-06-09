@@ -272,5 +272,5 @@ Run `npm test` to check lint and execute tests
 see [CHANGELOG](https://github.com/CocktailJS/cocktail/blob/master/CHANGELOG.md)
 
 ## License
-Copyright (c) 2013 - 2015 Maximiliano Fierro  
+Copyright (c) 2013 - 2016 Maximiliano Fierro  
 Licensed under the MIT license.
