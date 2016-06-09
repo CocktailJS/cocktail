@@ -188,10 +188,11 @@ describe('cocktail', function(){
     describe('Use', function(){
 
         describe('use(Class)', function(){
-            var MyAnnotation = function(){},
-                processors;
 
             it('adds MyAnnotation Class as a custom processor', function(){
+                var MyAnnotation = function(){},
+                    processors;
+
                 MyAnnotation.prototype.name = '@myannotation';
 
                 cocktail.use(MyAnnotation);
@@ -201,6 +202,38 @@ describe('cocktail', function(){
                 expect(processors).to.have.property('@myannotation');
 
                 expect(processors['@myannotation']).to.be.equal(MyAnnotation);
+
+            });
+
+            it('does not add MyAnnotation Class as a custom processor if name doesn\'t start wiht @', function(){
+                var MyAnnotation = function(){},
+                    processors;
+                
+                MyAnnotation.prototype.name = 'myannotation';
+
+                cocktail.use(MyAnnotation);
+
+                processors = cocktail.getProcessors();
+
+                expect(processors).to.not.have.property('@myannotation');
+
+                expect(processors['@myannotation']).to.be.equal(undefined);
+
+            });
+
+            it('does not add MyAnnotation Class as a custom processor if name is not defined in prototype', function(){
+                var MyAnnotation = function myannotation(){},
+                    processors;
+                
+                expect(MyAnnotation.name).to.be.equal('myannotation');
+
+                cocktail.use(MyAnnotation);
+
+                processors = cocktail.getProcessors();
+
+                expect(processors).to.not.have.property('@myannotation');
+
+                expect(processors['@myannotation']).to.be.equal(undefined);
 
             });
 
