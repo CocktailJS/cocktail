@@ -1,5 +1,12 @@
 ## CHANGE LOG
 
+- 0.7.3
+    - Fixed issue #27: `cocktail.use` issues with named funciton class constructors.
+    - Added test to cover #27.
+    - Copyright notice updated.
+    - Updated dev dependencies.
+    - Fixed linting issues.
+
 - 0.7.2
     - Fixed issue #26: Recursive loop when nesting `callSuper`. 
 
