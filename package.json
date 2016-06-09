@@ -32,11 +32,11 @@
     "coverage": "istanbul cover _mocha -- -u exports --recursive test"
   },
   "devDependencies": {
-    "chai": "~3.2",
-    "eslint": "^1.2.1",
-    "istanbul": "^0.3.18",
-    "mocha": "~2.2.5",
-    "sinon": "~1.16.1",
+    "chai": "~3.5.0",
+    "eslint": "^2.11.1",
+    "istanbul": "^0.4.3",
+    "mocha": "~2.5.3",
+    "sinon": "~1.17.4",
     "sinon-chai": "~2.8"
   },
   "keywords": [
